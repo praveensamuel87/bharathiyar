@@ -1,3 +1,5 @@
+import { finalJSON } from './finalJson';
+import { HomePage } from './../pages/home-page/home-page';
 import { Component, ViewChild } from '@angular/core';
 
 import { Platform, MenuController, Nav } from 'ionic-angular';
@@ -6,8 +8,8 @@ import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
+import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 
 @Component({
   templateUrl: 'app.html'
@@ -15,23 +17,33 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // make HelloIonicPage the root (or first) page
-  rootPage = HelloIonicPage;
-  pages: Array<{title: string, component: any}>;
+  // make HomePage the root (or first) page
+  rootPage = HomePage;
+  pages: Array<{ title: string, component: any }>;
+  finalJSONValue: any = finalJSON;
 
   constructor(
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public sqlStorageProvider: SqlStorageProvider
   ) {
     this.initializeApp();
-
     // set our app's pages
+    /*for (let j = 0; j < this.finalJSONValue.length; j++) {
+      console.log(this.finalJSONValue[j]);
+    }*/
     this.pages = [
       { title: 'Hello Ionic', component: HelloIonicPage },
-      { title: 'My First List', component: ListPage }
+      { title: 'My First List', component: ListPage },
+      { title: 'Home Page', component: HomePage },
     ];
+
+    /*for (let key in this.finalJSONValue) {
+      this.pages.push({ title: key, component: HomePage });
+    }*/
+
   }
 
   initializeApp() {
@@ -47,6 +59,6 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(page.component, {'selectedMenu': page.title});
   }
 }

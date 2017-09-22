@@ -8,10 +8,26 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'item-details.html'
 })
 export class ItemDetailsPage {
-  selectedItem: any;
-
+  selectedPage: any;
+  selectedTitle: any;
+  keys: Array<string> = [];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
+    this.selectedPage = navParams.get('item');
+    this.keys = Object.keys(this.selectedPage);
+    this.selectedTitle = navParams.get('heading');
+  }
+
+  itemTapped(event, page) {
+    
+    this.navCtrl.push(ItemDetailsPage, {
+      item: this.selectedPage[page],
+      heading: page 
+    });
+  }
+
+  favClick(event) {
+    console.log('fav has been clicked');
+
   }
 }

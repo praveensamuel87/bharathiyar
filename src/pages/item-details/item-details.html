@@ -9,12 +9,28 @@
 
 <ion-content>
   <ion-list>
-    <div *ngFor="let key of keys">
-      <button ion-item (click)="itemTapped($event, key)">
-      <ion-icon name="" item-left></ion-icon>
-      <span>{{key}}</span>
-     </button>
-     <ion-icon name="star-outline" (click)="favClick($event)"></ion-icon>
-    </div>
+    <ion-card>
+      <ion-list>
+        <button ion-item *ngFor="let key of selectedSongs" (click)="itemTapped($event, key)">
+                  <ion-icon name="musical-notes" item-start></ion-icon>
+                  {{key.name}}
+                </button>
+      </ion-list>
+    </ion-card>
+    <ion-card *ngFor="let songsList of selectedChapters" class="accordion">
+      <ion-card-header (click)="songsList.hide = !songsList.hide">
+          
+          <ion-icon ios="ios-book" md="md-book"></ion-icon>
+        <ion-icon float-right [name]="songsList.hide ? 'add-circle': 'remove-circle'"></ion-icon>
+        {{songsList.name}}
+      </ion-card-header>
+
+      <ion-list [class.close]="songsList.hide" [class.open]="!songsList.hide">
+        <button ion-item *ngFor="let song of songsList.songs; let $index = index" (click)="itemTapped($event, song)">
+                <ion-icon name="musical-notes" item-start></ion-icon>
+                {{song.name}}
+              </button>
+      </ion-list>
+    </ion-card>
   </ion-list>
 </ion-content>

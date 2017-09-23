@@ -1,3 +1,4 @@
+import { SearchPage } from './../pages/search/search';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -19,11 +20,12 @@ import { HomePage } from '../pages/home-page/home-page';
     HelloIonicPage,
     ItemDetailsPage,
     ListPage,
-    HomePage
+    HomePage,
+    SearchPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{iconMode: 'md'}),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -31,7 +33,8 @@ import { HomePage } from '../pages/home-page/home-page';
     HelloIonicPage,
     ItemDetailsPage,
     ListPage,
-    HomePage
+    HomePage,
+    SearchPage
   ],
   providers: [
     StatusBar,

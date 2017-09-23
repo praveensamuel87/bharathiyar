@@ -7,14 +7,34 @@
   </ion-navbar>
 </ion-header>
 
+<ion-content class="card-background-page row">
 
-<ion-content padding>
+  <!--<ion-card *ngFor="let page of pages;let $isOdd=odd;let $isEven=even" (click)="itemTapped($event, page)">
+    <img col-3 src="../../assets/img/India-flag-2.png" class="highlighter" [attr.float-right]="$isOdd ? true: null" [attr.float-left]="$isEven ? true: null" />
+    <ion-card-content col-9>
+      <div class="card-title">{{page.title}}</div>
+      <div class="card-subtitle">{{page.totalListing}} பட்டியல்கள்</div>
+    </ion-card-content>
+  </ion-card>-->
 
-  <ion-list>
-    <button ion-item *ngFor="let page of pages" (click)="itemTapped($event, page)">
-      <ion-icon name="" item-left></ion-icon>
-      {{page.title}}
-     </button>
-  </ion-list>
+  <ion-card class="thumbnail" *ngFor="let page of pages;let $isOdd=odd;let $isEven=even" (click)="itemTapped($event, page)">
+    <ion-card-content>
+      <div class="card-title">{{page.title}}</div>
+      <div class="card-subtitle">
+        <ion-icon ios="ios-musical-notes" md="md-musical-notes"></ion-icon>{{page.totalListing}} பட்டியல்கள்</div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab right bottom>
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="openSearch()"><ion-icon ios="ios-search" md="md-search"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
 
 </ion-content>

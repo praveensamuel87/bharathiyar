@@ -1,3 +1,4 @@
+import { ListPage } from './../list/list';
 import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
@@ -8,21 +9,23 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'item-details.html'
 })
 export class ItemDetailsPage {
-  selectedPage: any;
+  selectedSection: any;
+  selectedSongs: any;
+  selectedChapters: any;
   selectedTitle: any;
   keys: Array<string> = [];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.selectedPage = navParams.get('item');
-    this.keys = Object.keys(this.selectedPage);
-    this.selectedTitle = navParams.get('heading');
+    this.selectedSection = navParams.get('item');
+    this.selectedChapters = this.selectedSection.chapters;
+    this.selectedSongs = this.selectedSection.songs;
+    this.selectedTitle = this.selectedSection.name;
   }
 
   itemTapped(event, page) {
     
-    this.navCtrl.push(ItemDetailsPage, {
-      item: this.selectedPage[page],
-      heading: page 
+    this.navCtrl.push(ListPage, {
+      item: page
     });
   }
 

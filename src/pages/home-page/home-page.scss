@@ -1,3 +1,68 @@
 page-hello-ionic {
-
+    .card-background-page {
+        .scroll-content {
+            margin-top: 54px!important;
+        }
+        ion-card {
+            position: relative;
+            text-align: center;
+            img {
+                height: 100%;
+                display: inline-block;
+            }
+            ion-card-content {
+                line-height: 1;
+            }
+            &.thumbnail {
+                width: 46%;
+                display: inline-block;
+                box-sizing: content-box;
+                min-height: 125px;
+                margin: 7px;
+            }
+            &.thumbnail:nth-child(1) {
+                background-color: #D32F2F;
+                background-image: url(../../assets/img/red_pattern.png);
+            }
+            &.thumbnail:nth-child(2) {
+                border-color: #7B1FA2;
+                background-color: #7B1FA2;
+            }
+            &.thumbnail:nth-child(3) {
+                border-color: #388E3C;
+                background-color: #388E3C;
+            }
+            &.thumbnail:nth-child(4) {
+                border-color: #FF9800;
+                background-color: #FF9800;
+            }
+            &.thumbnail:nth-child(5) {
+                border-color: #03A9F4;
+                background-color: #03A9F4;
+            }
+            &.thumbnail:nth-child(6) {
+                border-color: #C2185B;
+                background-color: #C2185B;
+            }
+        }
+        .card-title {
+            font-size: 1.0em;
+            width: 100%;
+            font-weight: bold;
+            color: #fff;
+            padding-top: 10px;
+        }
+        .card-subtitle {
+            font-size: 1.0em;
+            width: 100%;
+            color: #fff;
+            padding-top: 10px;
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            ion-icon {
+                padding-right: 5px;
+            }
+        }
+    }
 }

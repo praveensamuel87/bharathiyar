@@ -9,26 +9,27 @@ import { ItemDetailsPage } from '../item-details/item-details';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+  imageLocation: any= "assets/img/";
+  selectedSong: any;
+  selectedPallavi: any;
+  selectedSaranam: any;
+  imageSrc: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
+    this.selectedSong = navParams.get('item');
+    this.selectedPallavi = this.selectedSong.pallavi ? this.decode(this.selectedSong.pallavi) : "";
+    this.selectedSaranam = this.selectedSong.saranam ? this.decode(this.selectedSong.saranam) : "";
+    this.imageSrc = this.selectedSong.imgSrc ? this.imageLocation + this.selectedSong.imgSrc: "";
+  }
 
-    this.items = [];
-    for(let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  encode(value) {
+    return encodeURIComponent(value).replace(/'/g, "%27").replace(/"/g, "%22");
+  }
+  decode(value) {
+    return decodeURIComponent(value.replace(/\+/g, " "));
   }
 
   itemTapped(event, item) {
-    this.navCtrl.push(ItemDetailsPage, {
-      item: item
-    });
+
   }
 }

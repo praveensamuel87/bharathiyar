@@ -35,9 +35,7 @@ export class MyApp {
       console.log(this.finalJSONValue[j]);
     }*/
     this.pages = [
-      { title: 'Hello Ionic', component: HelloIonicPage },
-      { title: 'My First List', component: ListPage },
-      { title: 'Home Page', component: HomePage },
+      { title: 'முகப்புப் பக்கம்', component: HomePage },
     ];
 
     /*for (let key in this.finalJSONValue) {

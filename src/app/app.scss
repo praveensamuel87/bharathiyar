@@ -1,5 +1,8 @@
 // http://ionicframework.com/docs/theming/
-
+$mainHeading: #009688;
+$backgroundNorml: #ffffff;
+$cardBackground: #4DB6AC;
+$cardhighlight: #26A69A;
 
 // App Global Sass
 // --------------------------------------------------
@@ -14,3 +17,30 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@import url('https://fonts.googleapis.com/css?family=Mukta+Malar:400,500,600,700,800');
+ion-app.md {
+    font-family: 'Mukta Malar Regular',"Roboto", "Helvetica Neue", sans-serif;
+}
+.toolbar-background {
+  background-color: $mainHeading;
+}
+.toolbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;    
+}
+.bar-button-default-ios {
+    color:#fff;
+}
+ion-content.content-ios {
+    background-color: $backgroundNorml;
+}
+
+.highlighter {
+    background-color: $cardhighlight;
+}
+
+.main-logo {
+    height: 210px;
+    width: 100%;
+}

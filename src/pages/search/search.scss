@@ -1,3 +1,22 @@
 search-page {
-
+    .searchSummary {
+        margin: 10px 20px;
+    }
+    ion-card-header {
+        &.card-header-ios {
+            font-weight: bold;
+            background-color: #19b8a4;
+            color: white;
+            padding: 0 15px;
+            min-height: 50px;
+            line-height: 50px;
+            font-size: 1.5rem;
+            ion-icon {
+                float: left;
+                line-height: 50px;
+                font-size: 2em;
+                padding-right: 10px;
+            }
+        }
+    }
 }

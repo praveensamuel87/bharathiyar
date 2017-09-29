@@ -3,15 +3,25 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Search</ion-title>
+    <ion-title>தேடல் பக்கம்</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <ion-searchbar animated="true" placeholder="தேடல்"
-    [(ngModel)]="myInput"
-    [showCancelButton]="false"
-    (ionInput)="onInput($event)"
+  <ion-searchbar animated="true" placeholder="பாடல்/கவிதை தேடல்" [(ngModel)]="myInput" [showCancelButton]="false" (ionInput)="onInput($event)"
     (ionCancel)="onCancel($event)">
   </ion-searchbar>
+  <ion-card *ngIf="serachResult.length && myInput">
+    <ion-card-header>
+      <ion-icon name="information-circle"></ion-icon>
+      தேடல் முடிவுகள் ({{serachResult.length}})
+    </ion-card-header>
+    <ion-list>
+      <button ion-item *ngFor="let song of serachResult" (click)="itemTapped($event, song)">
+                  <ion-icon name="musical-note" item-start></ion-icon>
+                  {{song.songName}}
+                </button>
+    </ion-list>
+  </ion-card>
+
 </ion-content>

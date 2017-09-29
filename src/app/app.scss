@@ -1,9 +1,8 @@
 // http://ionicframework.com/docs/theming/
-$mainHeading: #009688;
-$backgroundNorml: #ffffff;
+$mainHeading: #19b8a4;
+$backgroundNorml: #f6f8ff;
 $cardBackground: #4DB6AC;
 $cardhighlight: #26A69A;
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -18,29 +17,128 @@ $cardhighlight: #26A69A;
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @import url('https://fonts.googleapis.com/css?family=Mukta+Malar:400,500,600,700,800');
-ion-app.md {
-    font-family: 'Mukta Malar Regular',"Roboto", "Helvetica Neue", sans-serif;
+ion-app.md,
+ion-app.ios {
+    font-family: 'Mukta Malar Regular', "Roboto", "Helvetica Neue", sans-serif;
 }
+
 .toolbar-background {
-  background-color: $mainHeading;
+    background-color: $mainHeading;
 }
+
 .toolbar-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #fff;    
+    color: #fff;
 }
-.bar-button-default-ios {
-    color:#fff;
+
+.bar-button-default-ios,
+.bar-button-default-md {
+    color: #fff;
 }
-ion-content.content-ios {
-    background-color: $backgroundNorml;
+
+ion-content {
+    &.content-ios,
+    &.content-md {
+        background-color: $backgroundNorml;
+        ion-list {
+            background-color: $backgroundNorml;
+        }
+    }
+}
+
+ion-title {
+    &.secondary {
+        background-color: $secondaryHeading;
+        .toolbar-title {
+            min-height: 40px;
+            line-height: 40px;
+        }
+    }
+}
+
+.no-scroll {
+    .scroll-content {
+        overflow: hidden;
+    }
 }
 
 .highlighter {
     background-color: $cardhighlight;
 }
 
-.main-logo {
-    height: 210px;
-    width: 100%;
+.biggerIcon {
+    background-color: inherit;
+    ion-icon {
+        font-size: 2.2em;
+        &.ion-md-heart,
+        &.ion-ios-heart,
+        &.ion-md-heart-outline,
+        &.ion-ios-heart-outline {
+            color: white;
+        }
+    }
+}
+
+button {
+    &.item-ios,
+    &.item-md,
+    {
+        // background-color: #edf8f7;
+    }
+}
+
+.left-menu {
+    .main-logo {
+        background-image: url(../assets/img/tamil_carving.jpg);
+        height: 175px;
+        width: 100%;
+        background-size: contain;
+        display: inline-block;
+        filter: blur(0.2px);
+        .overlay {
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            opacity: 0.5;
+        }
+    }
+    .bharathi-logo {
+        background-image: url(../assets/img/icon.jpg);
+        height: 90px;
+        background-size: contain;
+        border-radius: 45px;
+        display: inline-block;
+        border: 3px solid #9E9E9E;
+        position: absolute;
+        width: 90px;
+        top: 38px;
+        left: 33%;
+        background-position: center top;
+    }
+    ion-content.content-ios,
+    ion-content.content-md {
+        background-color: #3f4b57;
+        button {
+            background-color: #3f4b57;
+            color: white;
+        }
+        ion-list {
+            .item-block {
+                border: none;
+                border-bottom: 1px solid #343d47;
+                color: #b8bdc0;
+                .item-inner {
+                    border: none;
+                    ion-icon {
+                        padding: 0px 10px;
+                    }
+                    span {
+                        top: -1px;
+                        position: relative;
+                    }
+                }
+            }
+        }
+    }
 }

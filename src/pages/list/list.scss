@@ -1,3 +1,60 @@
 page-list {
-
+    ion-content.content-ios,
+    ion-content.content-md {
+        background-color: #ffffff;
+        ion-list {
+            margin-bottom: 50px;
+        }
+    }
+    .imageSection {
+        height: 200px;
+        background-position: center top;
+        background-size: cover;
+        position: relative;
+        background-image: url("../../assets/img/bharathi_song_banner.jpg");
+        div {
+            position: absolute;
+            height: 40px;
+            line-height: 40px;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(52, 52, 52, 0.8);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    }
+    ion-item {
+        &.item-block {
+            display: block !important;
+            text-align: center;
+            padding: 10px;
+            font-size: $bodyFontSize;
+            border-bottom: none!important;
+            .btsub {
+                font-weight: bold;
+            }
+        }
+    }
+    ion-fab {
+        position: fixed;
+        ion-fab-list {
+            button {
+                &.fab {
+                    background-color: #e9e7e7;
+                    &.favourite {
+                        &.active {
+                            background-color: #be2525;
+                            color: white;
+                        }
+                    }
+                    &.share {
+                        background-color: #2091eb;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -3,14 +3,27 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{selectedSong.name}}</ion-title>
+    <ion-title>{{selectedSong.chapterName}}</ion-title>
   </ion-navbar>
+
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <img [attr.src]="imageSrc"/>
-    <div [innerHTML]='selectedPallavi'></div>
-    <div [innerHTML]='selectedSaranam'></div>
-  </ion-list>
+  <div (swipe)="swipeEvent($event)">
+    <ion-list>
+      <div>
+        <div class="imageSection" [style.background-image]="'url('+selectedSong.imgSrc+')'">
+          <div>{{selectedSong.songName}}</div>
+        </div>
+      </div>
+      <ion-item *ngIf="selectedSong.songText" [innerHTML]='selectedSong.songText'></ion-item>
+    </ion-list>
+    <ion-fab right bottom #fab>
+      <button ion-fab><ion-icon name="add"></ion-icon></button>
+      <ion-fab-list side="top">
+        <button ion-fab (click)="favClick(selectedSong)" class="favourite" [class.active]="isFavourite"><ion-icon [name]="isFavourite? 'star' : 'star' "></ion-icon></button>
+        <button ion-fab (click)="shareSS()" class="share"><ion-icon name="share"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab>
+  </div>
 </ion-content>

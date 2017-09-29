@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>பாரதியார் கவிதைகள்</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-title #subHeader id="subHeader" class="secondary" text-center>பிடித்தவை</ion-title>
+  <ion-card *ngIf="favArray.length">
+    <ion-list>
+      <button ion-item *ngFor="let song of favArray" (click)="itemTapped($event, song.key)">
+                  <ion-icon name="book" item-start></ion-icon>
+                  {{song.value}}
+                </button>
+    </ion-list>
+  </ion-card>
+  <div class="info" *ngIf="!favArray.length">
+    <ion-icon name="star"></ion-icon>
+    <div class="message">
+      பிடித்த பட்டியலில் எதுவும் இல்லை
+    </div>
+  </div>
+
+</ion-content>

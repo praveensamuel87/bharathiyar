@@ -1,36 +1,69 @@
 <ion-header>
   <ion-navbar>
-    <button menuToggle *ngIf="!selectedPage">
+    <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{selectedTitle}}</ion-title>
+    <ion-title>பாரதியார் கவிதைகள்</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-card>
-      <ion-list>
-        <button ion-item *ngFor="let key of selectedSongs" (click)="itemTapped($event, key)">
-                  <ion-icon name="musical-notes" item-start></ion-icon>
-                  {{key.name}}
-                </button>
-      </ion-list>
-    </ion-card>
-    <ion-card *ngFor="let songsList of selectedChapters" class="accordion">
-      <ion-card-header (click)="songsList.hide = !songsList.hide">
-          
-          <ion-icon ios="ios-book" md="md-book"></ion-icon>
-        <ion-icon float-right [name]="songsList.hide ? 'add-circle': 'remove-circle'"></ion-icon>
-        {{songsList.name}}
+<ion-content id="itemContent" (ionScroll)="onScrollEvent($event)">
+  <ion-title #subHeader id="subHeader" class="secondary" text-center>{{selectedTitle}}</ion-title>
+  <ion-list class="accordion">
+    <ion-card *ngFor="let songsList of selectedChapters;">
+      <ion-card-header (click)="songsList.show = !songsList.show">
+
+        <ion-icon name="ios-folder-outline" float-left></ion-icon>
+        <div class="accordionHeading"> {{songsList.name}} ({{songsList.songs.length}})</div>
+        <ion-icon float-right [name]="songsList.show ? 'remove': 'add'"></ion-icon>
+
       </ion-card-header>
 
-      <ion-list [class.close]="songsList.hide" [class.open]="!songsList.hide">
-        <button ion-item *ngFor="let song of songsList.songs; let $index = index" (click)="itemTapped($event, song)">
-                <ion-icon name="musical-notes" item-start></ion-icon>
+      <ion-list [class.close]="!songsList.show" [class.open]="songsList.show">
+        <ion-item-sliding #item *ngFor="let song of songsList.songs; let $index = index">
+          <!--<ion-item-options side="right">
+            <button ion-button (click)="favClick(item, song.index)">
+                    <ion-icon ios="ios-heart" md="md-heart" isActive="true" class="favorite"></ion-icon></button>
+            <button ion-button (click)="shreUsingShareSheet(item, song)">
+                        <ion-icon name="share" class="share"></ion-icon></button>
+          </ion-item-options>-->
+          <button ion-item (click)="itemTapped($event, song.index)">
+                <ion-icon name="book" item-start></ion-icon>
                 {{song.name}}
               </button>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-card>
+    <ion-card *ngIf="selectedSongs.length !== 0">
+      <ion-card-header (click)="showOtherSongList = !showOtherSongList">
+
+        <ion-icon name="ios-folder-outline" float-left></ion-icon>
+        <div class="accordionHeading"> மற்றவை ({{selectedSongs.length}})</div>
+        <ion-icon float-right [name]="showOtherSongList ? 'remove': 'add'"></ion-icon>
+       
+      </ion-card-header>
+      <ion-list [class.close]="!showOtherSongList" [class.open]="showOtherSongList">
+        <ion-item-sliding #item *ngFor="let key of selectedSongs; let $index = index;">
+          <!--<ion-item-options side="right">
+            <button ion-button (click)="favClick(item, key.index)">
+                  <ion-icon ios="ios-heart" md="md-heart" isActive="true" class="favorite active"></ion-icon></button>
+            <button ion-button (click)="shreUsingShareSheet(item, key)">
+                      <ion-icon name="share" class="share"></ion-icon></button>
+          </ion-item-options>-->
+          <button ion-item (click)="itemTapped($event, key.index)">
+                    <ion-icon name="book" item-start></ion-icon>
+                    {{key.name}}
+                  </button>
+        </ion-item-sliding>
       </ion-list>
     </ion-card>
   </ion-list>
+  <!--  <ion-fab top right>
+
+    <button [hidden]="!backToTopVisible" ion-fab (click)="scrollToTop()"><ion-icon ios="ios-arrow-dropup-circle" md="md-arrow-dropup-circle"></ion-icon></button>
+  </ion-fab> -->
+
+  <ion-fab bottom right>
+    <button ion-fab (click)="openSearch()"><ion-icon name="search"></ion-icon></button>
+  </ion-fab>
 </ion-content>

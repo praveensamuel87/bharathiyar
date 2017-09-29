@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Platform } from 'ionic-angular'
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';;
+import { Platform } from 'ionic-angular';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import 'rxjs/add/operator/map';
 
 /*
@@ -18,7 +17,7 @@ export class SqlStorageProvider {
   constructor(public platform: Platform, public sqlite: SQLite) {
     console.log('Hello SqlStorageProvider Provider');
     this.platform.ready().then(() => {
-
+      //comment this to running in browser
       /*this.sqlite.create({ name: this.DB_NAME, location: 'default' })
         .then((db: SQLiteObject) => {
           this.storage = db;
@@ -28,7 +27,7 @@ export class SqlStorageProvider {
   }
 
   tryInit() {
-    this.query('CREATE TABLE IF NOT EXISTS kv (key text primary key, value text)')
+    this.query('CREATE TABLE IF NOT EXISTS favourites (key INTEGER PRIMARY KEY AUTOINCREMENT, value text)')
       .catch(err => {
         console.error('Unable to create initial storage tables', err.tx, err.err);
       });
@@ -59,23 +58,38 @@ export class SqlStorageProvider {
   }
 
   /** GET the value in the database identified by the given key. */
-  get(key: string): Promise<any> {
-    return this.query('select key, value from kv where key = ? limit 1', [key])
+  getAllFav(): Promise<any> {
+    return this.query('select key, value from favourites')
+      .then(data => {
+        let returnArr = [];
+        if (data.res.rows.length > 0) {
+          for (var i = 0; i < data.res.rows.length; i++) {
+            returnArr.push(data.res.rows.item(i));
+          }
+        }
+        return returnArr;
+      });
+  }
+
+  /** GET the value in the database identified by the given key. */
+  getFav(key: string): Promise<any> {
+    return this.query('select key, value from favourites where key = ? limit 1', [key])
       .then(data => {
         if (data.res.rows.length > 0) {
           return data.res.rows.item(0).value;
         }
+        return "";
       });
   }
 
   /** SET the value in the database for the given key. */
-  set(key: string, value: string): Promise<any> {
-    return this.query('insert into kv(key, value) values (?, ?)', [key, value]);
+  setFav(key: string, value: string): Promise<any> {
+    return this.query('insert into favourites(key, value) values (?, ?)', [key, value]);
   }
 
   /** REMOVE the value in the database for the given key. */
-  remove(key: string): Promise<any> {
-    return this.query('delete from kv where key = ?', [key]);
+  removeFav(key: string): Promise<any> {
+    return this.query('delete from favourites where key = ?', [key]);
   }
 
 }

@@ -34,8 +34,8 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #009688,
-  secondary:  #D50000,
+  primary:    #00C853, //#EC407A,
+  secondary:  #19b8a4,
   danger:     #f53d3d,
   light:      #E8EAF6,
   dark:       #222,
@@ -44,8 +44,8 @@ $colors: (
   cardBackground: #4DB6AC,
   cardhighlight: #26A69A  
 );
-
-
+$secondaryHeading: #455a64;
+$bodyFontSize: 1.4rem;
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here

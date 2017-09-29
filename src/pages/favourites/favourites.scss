@@ -1,0 +1,24 @@
+favourites-page {
+    ion-content {
+        .info {
+            text-align: center;
+            margin-top: 50px;
+            ion-icon {
+                font-size: 10em;
+                text-align: center;
+                color: #dbe2e1;
+            }
+            .message {
+                $color: $secondaryHeading;
+                font-weight: bold;
+            }
+        }
+        
+        ion-card {
+            border-radius: 10px;
+            .item {
+                font-size: $bodyFontSize;
+            }
+        }
+    }
+}

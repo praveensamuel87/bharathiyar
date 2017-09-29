@@ -17,13 +17,13 @@ export class HelloIonicPage {
   }
 
   addValue() {
-    this.sqlStorage.set(this.key,this.value);
+    //this.sqlStorage.set(this.key,this.value);
     alert(this.value);
   }
 
   removeValue() {
-    this.sqlStorage.get(this.key).then(data => {
-      alert(data);
-       });    
+    //this.sqlStorage.get(this.key).then(data => {
+      //alert(data);
+       //});    
   }
 }

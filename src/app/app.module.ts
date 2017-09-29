@@ -1,9 +1,14 @@
+import { CustomfilterBy } from './../pages/shared/filterBy';
+import { FavouritesPage } from './../pages/favourites/favourites';
+import { SongsModel } from './../pages/shared/songsModel';
 import { SearchPage } from './../pages/search/search';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Toast } from '@ionic-native/toast';
+import { Screenshot } from '@ionic-native/screenshot';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
@@ -21,7 +26,9 @@ import { HomePage } from '../pages/home-page/home-page';
     ItemDetailsPage,
     ListPage,
     HomePage,
-    SearchPage
+    SearchPage,
+    FavouritesPage,
+    CustomfilterBy
   ],
   imports: [
     BrowserModule,
@@ -34,14 +41,20 @@ import { HomePage } from '../pages/home-page/home-page';
     ItemDetailsPage,
     ListPage,
     HomePage,
-    SearchPage
+    SearchPage,
+    FavouritesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SqlStorageProvider,
-    SQLite
+    SQLite,
+    SocialSharing,
+    Screenshot,
+    Toast,
+    SongsModel,
+    CustomfilterBy
   ]
 })
 export class AppModule {}

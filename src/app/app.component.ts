@@ -1,11 +1,9 @@
+import { FavouritesPage } from './../pages/favourites/favourites';
 import { finalJSON } from './finalJson';
 import { HomePage } from './../pages/home-page/home-page';
 import { Component, ViewChild } from '@angular/core';
 
-import { Platform, MenuController, Nav } from 'ionic-angular';
-
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
-import { ListPage } from '../pages/list/list';
+import { Platform, MenuController, Nav } from 'ionic-angular'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
@@ -19,7 +17,7 @@ export class MyApp {
 
   // make HomePage the root (or first) page
   rootPage = HomePage;
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string, icon: string, component: any }>;
   finalJSONValue: any = finalJSON;
 
   constructor(
@@ -31,16 +29,10 @@ export class MyApp {
   ) {
     this.initializeApp();
     // set our app's pages
-    /*for (let j = 0; j < this.finalJSONValue.length; j++) {
-      console.log(this.finalJSONValue[j]);
-    }*/
     this.pages = [
-      { title: 'முகப்புப் பக்கம்', component: HomePage },
+      { title: 'முகப்புப் பக்கம்', icon: 'ios-home-outline', component: HomePage },
+      { title: 'பிடித்தவை', icon: 'star-outline', component: FavouritesPage }
     ];
-
-    /*for (let key in this.finalJSONValue) {
-      this.pages.push({ title: key, component: HomePage });
-    }*/
 
   }
 
@@ -57,6 +49,6 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component, {'selectedMenu': page.title});
+    this.nav.setRoot(page.component, { 'selectedMenu': page.title });
   }
 }

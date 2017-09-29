@@ -1,13 +1,16 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" class="left-menu">
 
   <ion-header>
-      <img alt="logo" class="main-logo" src="../assets/img/bharathi1.jpg">
+    <div class="main-logo">
+      <div class="overlay"></div>
+    </div> <span class="bharathi-logo"></span>
   </ion-header>
 
-  <ion-content>
+  <ion-content class="no-scroll">
     <ion-list>
-      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+      <button ion-item *ngFor="let p of pages" (click)="openPage(p)" detail-none>
+          <ion-icon [name]="p.icon"></ion-icon>
+        <span>{{p.title}}</span>
       </button>
     </ion-list>
   </ion-content>

@@ -1,9 +1,13 @@
+import { LoaderSvc } from './../shared/loaderSvc';
+import { otherSongJSON } from './../../app/otherSongsJson';
+import { finalJSON } from './../../app/finalJson';
 import { SongsModel } from './../shared/songsModel';
 import { SearchPage } from './../search/search';
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
-import { finalJSON } from '../../app/finalJson';
+import { kaaviyamJSON } from './../../app/KaaviyamJson';
 import { ItemDetailsPage } from '../item-details/item-details';
+
 @Component({
   selector: 'page-hello-ionic',
   templateUrl: 'home-page.html'
@@ -13,18 +17,18 @@ export class HomePage {
   public pages: Array<{ title: any, value: any, totalListing: any }> = [];
   value: any;
   songDB: Array<any> = [];
-  loader = this.loadingCtrl.create({
-    content: "Loading..."
-  });
+ 
   defaultImg: string = "assets/img/bharathi_song_banner.jpg";
   imageLocation: any = "assets/img/";
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public songsModel: SongsModel) {
-    this.loader.present();
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public songsModel: SongsModel, private _loader: LoaderSvc) {
+    this._loader.showLoader();
     this.init();
   }
 
   init() {
     let index = 0;
+    finalJSON.sections.push(otherSongJSON);
+    finalJSON.sections.push(kaaviyamJSON);
     for (let section of finalJSON.sections) {
       let totalSongs = section.songs ? section.songs.length : 0;
       let sectionObj = { "chapters": [], "songs": [], "name": "" };
@@ -65,13 +69,14 @@ export class HomePage {
       this.pages.push({ title: section.name, value: sectionObj, totalListing: totalSongs });
     }
     this.songsModel.songsList = this.songDB;
-    this.loader.dismiss();
+    this._loader.hideLoader();
   }
 
   itemTapped(event, page) {
     this.navCtrl.push(ItemDetailsPage, {
       item: page,
-    });
+    },{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
+    this._loader.showLoader();
   }
 
   openSearch() {
@@ -88,7 +93,7 @@ export class HomePage {
     sectionObj.songName = songName;
     sectionObj.songText = songText ? this.decode(songText) : "";
     sectionObj.thalam = thalam ? thalam : "";
-    sectionObj.imgSrc = imgSrc ?  this.imageLocation + imgSrc : this.defaultImg;
+    sectionObj.imgSrc = imgSrc ? this.imageLocation + imgSrc : this.defaultImg;
     this.songDB.push(sectionObj);
   }
 

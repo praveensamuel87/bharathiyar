@@ -38,7 +38,7 @@ export class ItemDetailsPage {
 
     this.navCtrl.push(ListPage, {
       item: index
-    });
+    },{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
   }
 
   favClick(slidingItem: ItemSliding, song: any) {
@@ -47,7 +47,7 @@ export class ItemDetailsPage {
 
   }
   openSearch() {
-    this.navCtrl.push(SearchPage);
+    this.navCtrl.push(SearchPage, {},{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
   }
 
   scrollToTop() {

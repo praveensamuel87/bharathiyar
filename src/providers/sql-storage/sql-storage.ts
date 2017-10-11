@@ -18,11 +18,11 @@ export class SqlStorageProvider {
     console.log('Hello SqlStorageProvider Provider');
     this.platform.ready().then(() => {
       //comment this to running in browser
-      /*this.sqlite.create({ name: this.DB_NAME, location: 'default' })
+      this.sqlite.create({ name: this.DB_NAME, location: 'default' })
         .then((db: SQLiteObject) => {
           this.storage = db;
           this.tryInit();
-        });*/
+        });
     });
   }
 

@@ -38,7 +38,7 @@ export class SearchPage {
 
     this.navCtrl.push(ListPage, {
       item: page.id
-    });
+    },{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
   }
 
   scrollToTop() {

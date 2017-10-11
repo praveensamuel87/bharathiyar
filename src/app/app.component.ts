@@ -1,3 +1,4 @@
+import { SettingsPage } from './../pages/settings/settings';
 import { FavouritesPage } from './../pages/favourites/favourites';
 import { finalJSON } from './finalJson';
 import { HomePage } from './../pages/home-page/home-page';
@@ -31,7 +32,8 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'முகப்புப் பக்கம்', icon: 'ios-home-outline', component: HomePage },
-      { title: 'பிடித்தவை', icon: 'star-outline', component: FavouritesPage }
+      { title: 'பிடித்தவை', icon: 'star-outline', component: FavouritesPage },
+      { title: 'Settings', icon: 'ios-settings-outline', component: SettingsPage }
     ];
 
   }
@@ -49,6 +51,6 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component, { 'selectedMenu': page.title });
+    this.nav.setRoot(page.component, { 'selectedMenu': page.title },{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
   }
 }

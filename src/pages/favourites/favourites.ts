@@ -16,7 +16,6 @@ export class FavouritesPage {
   favArray: Array<any> = [];
   constructor(public navCtrl: NavController, public songsModel: SongsModel, public sqlStorage: SqlStorageProvider) {
     this.songDB = this.songsModel.songsList;
-    //this.favArray = [{'key':'1','value':'கவிதைகள்'},{'key':'2','value':'கவிதைகள்1'}]
     this.getAllFav();
   }
   getAllFav() {

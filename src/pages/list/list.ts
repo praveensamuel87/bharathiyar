@@ -1,6 +1,5 @@
 import { SongsModel } from './../shared/songsModel';
 import { Component } from '@angular/core';
-
 import { NavController, NavParams } from 'ionic-angular';
 import { Toast } from '@ionic-native/toast';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -21,7 +20,7 @@ export class ListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public socialSharing: SocialSharing, public screenshot: Screenshot, public toast: Toast, public songsModel: SongsModel) {
     this.selectedSong = this.songsModel.getSong(navParams.get('item'));
     console.log('inside list page');
-    //this.getFav(this.selectedSong.id);
+    this.getFav(this.selectedSong.id);
   }
 
   encode(value) {
@@ -120,7 +119,12 @@ export class ListPage {
     if (event.direction === 2) {
       this.navCtrl.push(ListPage, {
         item: this.selectedSong.id + 1
-      });
+      },{animate: true, direction: 'forward',animation:'md-transition',easing:'ease-in-out'});
+    } else if (event.direction === 4) {
+      //this.navCtrl.pop();
+      this.navCtrl.push(ListPage, {
+        item: this.selectedSong.id - 1
+      },{animate: true, direction: 'back',animation:'md-transition',easing:'ease-in-out'});
     }
   }
 }

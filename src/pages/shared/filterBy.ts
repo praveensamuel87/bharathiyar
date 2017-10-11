@@ -13,7 +13,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CustomfilterBy implements PipeTransform {
 
     transform(items: any[], args: any[]): any {
-        return items.filter(item => item.songText.toLowerCase().indexOf(args[0].toLowerCase()) !== -1);
+        return items.filter(item => ((item.songName.toLowerCase().indexOf(args[0].toLowerCase()) !== -1) || item.songText.toLowerCase().indexOf(args[0].toLowerCase()) !== -1));
     }
 }
 

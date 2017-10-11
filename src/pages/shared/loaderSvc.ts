@@ -4,8 +4,7 @@ import { NavController, LoadingController } from 'ionic-angular';
 @Injectable()
 export class LoaderSvc {
     loader = this.loadingCtrl.create({
-        content: "Loading...",
-        dismissOnPageChange: true
+        content: "Loading..."
     });
 
 

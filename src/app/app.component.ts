@@ -32,8 +32,8 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'முகப்புப் பக்கம்', icon: 'ios-home-outline', component: HomePage },
-      { title: 'பிடித்தவை', icon: 'star-outline', component: FavouritesPage },
-      { title: 'Settings', icon: 'ios-settings-outline', component: SettingsPage }
+      { title: 'பிடித்தவை', icon: 'star-outline', component: FavouritesPage }
+      //{ title: 'Settings', icon: 'ios-settings-outline', component: SettingsPage }
     ];
 
   }

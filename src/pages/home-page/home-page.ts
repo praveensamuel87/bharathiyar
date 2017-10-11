@@ -76,7 +76,6 @@ export class HomePage {
     this.navCtrl.push(ItemDetailsPage, {
       item: page,
     },{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
-    this._loader.showLoader();
   }
 
   openSearch() {

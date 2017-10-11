@@ -1,6 +1,6 @@
 import { SongsModel } from './../shared/songsModel';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, FabContainer, App} from 'ionic-angular';
 import { Toast } from '@ionic-native/toast';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Screenshot } from '@ionic-native/screenshot';
@@ -17,9 +17,8 @@ export class ListPage {
   favArray: Array<any>;
   isFavourite: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public socialSharing: SocialSharing, public screenshot: Screenshot, public toast: Toast, public songsModel: SongsModel) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public socialSharing: SocialSharing, public screenshot: Screenshot, public toast: Toast, public songsModel: SongsModel,  public appCtrl: App) {
     this.selectedSong = this.songsModel.getSong(navParams.get('item'));
-    console.log('inside list page');
     this.getFav(this.selectedSong.id);
   }
 
@@ -40,6 +39,12 @@ export class ListPage {
       this.isFavourite = true;
       this.sqlStorage.setFav(song.id, song.songName);
       this.presentToast('பிடித்த பட்டியலில் சேர்க்கப்பட்டுள்ளது');
+    }
+  }
+
+  closeFab(fab: FabContainer, e: Event) {
+    if (e.srcElement.nodeName !== "ION-ICON") {
+      fab.close();
     }
   }
 
@@ -68,7 +73,7 @@ export class ListPage {
   }
 
   shareSS() {
-    this.screenshot.URI(80).then((response) => {
+    this.screenshot.URI(100).then((response) => {
       this.shareUsingShareSheet(response.URI);
     }, () => {
       this.presentToast('இந்த நேரத்தில் பகிர்ந்து கொள்ள முடியவில்லை');
@@ -106,7 +111,6 @@ export class ListPage {
   shareUsingShareSheet(url: any) {
     // Check if sharing via email is supported
     //share(message, subject, file, url)
-    console.log('shareUsingShareSheet has been clicked');
     this.socialSharing.share("வணக்கம். பாரதியாரின் இந்த கவிதை/பாடல் சுவாரசியமாக இருக்கிறது.", null, url, null);
     /*this.socialSharing.share("", "", "", "url").then(() => {
       // Sharing via email is possible
@@ -119,12 +123,18 @@ export class ListPage {
     if (event.direction === 2) {
       this.navCtrl.push(ListPage, {
         item: this.selectedSong.id + 1
-      },{animate: true, direction: 'forward',animation:'md-transition',easing:'ease-in-out'});
+      }, { animate: true, direction: 'forward', animation: 'transition', easing: 'ease-in-out' });
     } else if (event.direction === 4) {
       //this.navCtrl.pop();
+      let nextItem = this.selectedSong.id - 1;
+      if(nextItem === -1) {
+        this.presentToast('You have reached the begining of album');
+        return;
+      }
+      //this.navCtrl.pop();
       this.navCtrl.push(ListPage, {
-        item: this.selectedSong.id - 1
-      },{animate: true, direction: 'back',animation:'md-transition',easing:'ease-in-out'});
+        item: nextItem
+      }, { animate: true, direction: 'back', animation: 'transition', easing: 'ease-in-out' });
     }
   }
 }

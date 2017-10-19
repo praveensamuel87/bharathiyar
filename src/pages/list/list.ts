@@ -1,24 +1,30 @@
+import { ShareSvc } from './../shared/shareSvc';
 import { SongsModel } from './../shared/songsModel';
-import { Component } from '@angular/core';
-import { NavController, NavParams, FabContainer, App} from 'ionic-angular';
-import { Toast } from '@ionic-native/toast';
-import { SocialSharing } from '@ionic-native/social-sharing';
-import { Screenshot } from '@ionic-native/screenshot';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, FabContainer, Content } from 'ionic-angular';
 import { SqlStorageProvider } from '../../providers/sql-storage/sql-storage';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
 export class ListPage {
+  @ViewChild(Content) content: Content;
   selectedSong: any;
   selectedPallavi: any;
   selectedSaranam: any;
   imageSrc: any;
   favArray: Array<any>;
   isFavourite: boolean = false;
+  isShake: boolean = false;
+  showBackToTop: boolean = false;
+  searchKeyWord: string = '';
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public songsModel: SongsModel, private _sharedSvc: ShareSvc) {
+    this.init(navParams.get('item'));
+    this.searchKeyWord = navParams.get('searchKeyWord');
+  }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public socialSharing: SocialSharing, public screenshot: Screenshot, public toast: Toast, public songsModel: SongsModel,  public appCtrl: App) {
-    this.selectedSong = this.songsModel.getSong(navParams.get('item'));
+  init(id) {
+    this.selectedSong = this.songsModel.getSong(id);
     this.getFav(this.selectedSong.id);
   }
 
@@ -33,7 +39,7 @@ export class ListPage {
     if (this.isFavourite) {
       this.sqlStorage.removeFav(song.id);
       this.isFavourite = false;
-      this.presentToast('பிடித்த பட்டியலில் இருந்து நீக்கப்பட்டுள்ளது');
+      this.presentToast('பிடித்த பட்டியலில் இருந்து நீக்கப்பட்டுள்ளது.');
     }
     else {
       this.isFavourite = true;
@@ -65,76 +71,61 @@ export class ListPage {
   }
 
   presentToast(message: any) {
-    this.toast.show(message, '5000', 'bottom').subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
+    this._sharedSvc.presentToast(message);
   }
 
   shareSS() {
-    this.screenshot.URI(100).then((response) => {
-      this.shareUsingShareSheet(response.URI);
+    this._sharedSvc.takeScreenShot().then((response) => {
+      this._sharedSvc.openShareSheet("வணக்கம். பாரதியாரின் இந்த கவிதை/பாடல் சுவாரசியமாக இருக்கிறது.", response.URI);
+      //this.shareUsingShareSheet(response.URI);
     }, () => {
       this.presentToast('இந்த நேரத்தில் பகிர்ந்து கொள்ள முடியவில்லை');
     });
   }
 
-
-
-  shareViaWhatsapp(url: any) {
-    this.socialSharing.shareViaWhatsApp("", "", "").then(() => {
-      this.presentToast('Shared SuccessFully');
-    }).catch(() => {
-      this.presentToast('இந்த நேரத்தில் பகிர்ந்து கொள்ள முடியவில்லை');
-    });
-
-  }
-
-  shareViaTwitter(url: any) {
-    //shareViaTwitter(message, image, url)
-    this.socialSharing.shareViaTwitter("", "", "").then(() => {
-      this.presentToast('Shared SuccessFully');
-    }).catch(() => {
-      this.presentToast('இந்த நேரத்தில் பகிர்ந்து கொள்ள முடியவில்லை');
-    });
-  }
-  shareViaFB(url: any) {
-    //shareViaFacebook(message, image, url)
-    this.socialSharing.shareViaFacebook("", "", "").then(() => {
-      this.presentToast('Shared SuccessFully');
-    }).catch(() => {
-      this.presentToast('இந்த நேரத்தில் பகிர்ந்து கொள்ள முடியவில்லை');
-    });
-  }
-
-  shareUsingShareSheet(url: any) {
-    // Check if sharing via email is supported
-    //share(message, subject, file, url)
-    this.socialSharing.share("வணக்கம். பாரதியாரின் இந்த கவிதை/பாடல் சுவாரசியமாக இருக்கிறது.", null, url, null);
-    /*this.socialSharing.share("", "", "", "url").then(() => {
-      // Sharing via email is possible
-    }).catch(() => {
-      // Sharing via email is not possible
-    })*/
-  }
-
   swipeEvent(event: any) {
+    let nextItem = 0;
     if (event.direction === 2) {
-      this.navCtrl.push(ListPage, {
-        item: this.selectedSong.id + 1
-      }, { animate: true, direction: 'forward', animation: 'transition', easing: 'ease-in-out' });
+      nextItem = this.selectedSong.id + 1;
+      if (this.songsModel.songsListLength === nextItem) {
+        this.presentToast('You have reached the end of album');
+        return;
+      } else {
+        this.goToSong(nextItem);
+        this.searchKeyWord = '';
+      }
     } else if (event.direction === 4) {
       //this.navCtrl.pop();
       let nextItem = this.selectedSong.id - 1;
-      if(nextItem === -1) {
+      if (nextItem === -1) {
         this.presentToast('You have reached the begining of album');
         return;
       }
-      //this.navCtrl.pop();
-      this.navCtrl.push(ListPage, {
-        item: nextItem
-      }, { animate: true, direction: 'back', animation: 'transition', easing: 'ease-in-out' });
+      this.goToSong(nextItem);
+      this.searchKeyWord = '';
+    }
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop();
+  }
+
+  goToSong(index) {
+    this.isShake = true;
+    setTimeout(() => {
+      this.init(index);
+    }, 350);
+    setTimeout(() => {
+      this.isShake = false;
+      this.content.scrollToTop();
+    }, 700);
+  }
+
+  onScroll(e) {
+    if (this.content.getContentDimensions().scrollTop > 200) {
+      this.showBackToTop = true;
+    } else {
+      this.showBackToTop = false;
     }
   }
 }

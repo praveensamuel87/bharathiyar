@@ -2,6 +2,11 @@ page-item-details {
     .accordion {
         ion-card {
             border-radius: 5px;
+            .item {
+                .item-inner {
+                    border-bottom: 1px solid #dedede !important;
+                }
+            }
             ion-card-header {
                 font-weight: bold;
                 background-color: #19b8a4;
@@ -19,17 +24,16 @@ page-item-details {
                     max-height: 10000px;
                     /* approximate max height */
                     transition-property: all;
-                    transition-duration: 0.5s;
+                    transition-duration: 0.3s;
                     transition-timing-function: ease-in;
                 }
                 &.close {
                     transition-property: all;
-                    transition-duration: 0.5s;
+                    transition-duration: 0.3s;
                     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
                     max-height: 0;
                 }
                 ion-item-sliding {
-                    border-bottom: 1px solid #f6f8ff;
                     color: $secondaryHeading;
                     font-size: 1.4rem;
                     button {
@@ -39,7 +43,7 @@ page-item-details {
             }
             ion-icon {
                 font-weight: bold;
-                transition: transform 0.5s ease-out;
+                transition: transform 0.3s ease-out;
                 margin-right: 10px;
                 &.ion-md-add {
                     transform: rotate(180deg);

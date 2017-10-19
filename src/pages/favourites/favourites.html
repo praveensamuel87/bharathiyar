@@ -7,21 +7,30 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content overflow-scroll="true">
 
   <ion-title #subHeader id="subHeader" class="secondary" text-center>பிடித்தவை</ion-title>
   <ion-card *ngIf="favArray.length">
     <ion-list>
-      <button ion-item *ngFor="let song of favArray" (click)="itemTapped($event, song.key)">
-                  <ion-icon name="book" item-start></ion-icon>
-                  {{song.value}}
-                </button>
+      <ion-item-sliding class="item-remove-animate" #slidingItem (ionSwipe)="removeFromFav(song,$index,slidingItem)" *ngFor="let song of favArray; let $index = index;"
+        [class.remove]="song.isRemoved">
+        <button ion-item (click)="itemTapped($event, song.key)">
+          <ion-icon name="book" item-start></ion-icon>
+          {{song.value}}
+        </button>
+        <ion-item-options side="right">
+          <button ion-button color="danger" expandable (click)="removeFromFav(song,$index,slidingItem)">
+            <ion-icon name="md-trash"></ion-icon>
+            நீக்கு
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
   </ion-card>
   <div class="info" *ngIf="!favArray.length">
     <ion-icon name="star"></ion-icon>
     <div class="message">
-      பிடித்த பட்டியலில் எதுவும் இல்லை
+      பிடித்தமான பாடல் என்று எதையும் நீங்கள் இன்னும் குறிக்கவில்லை.
     </div>
   </div>
 

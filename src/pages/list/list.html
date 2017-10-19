@@ -8,7 +8,7 @@
 
 </ion-header>
 
-<ion-content overflow-scroll="true" (click) = "closeFab(fab, $event)">
+<ion-content overflow-scroll="true" (click)="closeFab(fab, $event)" [class.shake]="isShake" (ionScroll)="onScroll($event)">
   <div (swipe)="swipeEvent($event)">
     <ion-list>
       <div>
@@ -16,14 +16,25 @@
           <div>{{selectedSong.songName}}</div>
         </div>
       </div>
-      <ion-item *ngIf="selectedSong.songText" [innerHTML]='selectedSong.songText'></ion-item>
+      <ion-item *ngIf="selectedSong.songText" [innerHTML]='selectedSong.songText | highlightify: searchKeyWord'></ion-item>
     </ion-list>
     <ion-fab right bottom #fab>
-      <button ion-fab><ion-icon name="add"></ion-icon></button>
+      <button ion-fab>
+        <ion-icon name="add"></ion-icon>
+      </button>
       <ion-fab-list side="top">
-        <button ion-fab (click)="favClick(selectedSong)" class="favourite" [class.active]="isFavourite"><ion-icon [name]="isFavourite? 'star' : 'star' "></ion-icon></button>
-        <button ion-fab (click)="shareSS()" class="share"><ion-icon name="share"></ion-icon></button>
+        <button ion-fab (click)="favClick(selectedSong)" class="favourite" [class.active]="isFavourite">
+          <ion-icon [name]="isFavourite? 'star' : 'star' "></ion-icon>
+        </button>
+        <button ion-fab (click)="shareSS()" class="share">
+          <ion-icon name="share"></ion-icon>
+        </button>
       </ion-fab-list>
     </ion-fab>
+    <div *ngIf="showBackToTop">
+      <button class="backToTop" ion-button (click)="scrollToTop()">
+        <ion-icon name="ios-arrow-dropup-circle-outline"></ion-icon>
+      </button>
+    </div>
   </div>
 </ion-content>

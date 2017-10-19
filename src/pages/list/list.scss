@@ -1,4 +1,11 @@
 page-list {
+    ion-content.shake {
+        //animation: fadein 0.82s cubic-bezier(.36, .07, .19, .97) both;
+        animation: pinchInOut 0.65s linear;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+    }
     ion-content.content-ios,
     ion-content.content-md {
         background-color: #ffffff;
@@ -6,12 +13,27 @@ page-list {
             margin-bottom: 50px;
         }
     }
+    .backToTop {
+        visibility: hidden;
+        bottom: 10px;
+        left: 10px;
+        position: fixed;
+    }
     .imageSection {
         height: 200px;
         background-position: center top;
         background-size: cover;
         position: relative;
         background-image: url("../../assets/img/bharathi_song_banner.jpg");
+        background-repeat: no-repeat;
+        @include bp(mobile-max) {
+            background-size: contain;
+            background-color: #464646;
+        }
+        @include bp(tablet-min) {
+            height: 300px;
+            background-position: center center;
+        }
         div {
             position: absolute;
             height: 40px;

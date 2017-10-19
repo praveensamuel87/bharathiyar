@@ -52,6 +52,7 @@ export class ItemDetailsPage {
 
   scrollToTop() {
     this.content.scrollToTop();
+    this.backToTopVisible = false;
   }
 
   onScrollEvent($event) {

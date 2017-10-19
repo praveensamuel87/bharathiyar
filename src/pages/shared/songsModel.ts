@@ -17,8 +17,12 @@ export class SongsModel {
     return this._songsArr;
   }
 
+  get songsListLength(): number {
+    return this._songsArr.length;
+  }
+
   getSong(index: any): Object {
-    return this._songsArr[index] ? this._songsArr[index] : this._songsArr[0] ;
+    return this._songsArr[index] ? this._songsArr[index] : this._songsArr[0];
   }
 
 }

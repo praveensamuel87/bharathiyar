@@ -1,3 +1,6 @@
+import { HighlightifyPipe } from './../pages/shared/highlightifyPipe';
+import { ShareSvc } from './../pages/shared/shareSvc';
+import { AboutPage } from './../pages/about/about';
 import { LoaderSvc } from './../pages/shared/loaderSvc';
 import { SettingsPage } from './../pages/settings/settings';
 import { CustomfilterBy } from './../pages/shared/filterBy';
@@ -14,7 +17,6 @@ import { Screenshot } from '@ionic-native/screenshot';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
@@ -31,7 +33,9 @@ import { HomePage } from '../pages/home-page/home-page';
     SearchPage,
     FavouritesPage,
     CustomfilterBy,
-    SettingsPage
+    SettingsPage,
+    AboutPage,
+    HighlightifyPipe
     
   ],
   imports: [
@@ -47,7 +51,8 @@ import { HomePage } from '../pages/home-page/home-page';
     HomePage,
     SearchPage,
     FavouritesPage,
-    SettingsPage
+    SettingsPage,
+    AboutPage
   ],
   providers: [
     StatusBar,
@@ -60,8 +65,9 @@ import { HomePage } from '../pages/home-page/home-page';
     Toast,
     SongsModel,
     CustomfilterBy,
-    NativePageTransitions,
-    LoaderSvc
+    LoaderSvc,
+    ShareSvc,
+    HighlightifyPipe
   ]
 })
 export class AppModule {}

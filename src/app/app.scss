@@ -38,6 +38,10 @@ ion-app.ios {
 }
 
 ion-content {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
     &.content-ios,
     &.content-md {
         background-color: $backgroundNorml;
@@ -80,14 +84,6 @@ ion-title {
     }
 }
 
-button {
-    &.item-ios,
-    &.item-md,
-    {
-        // background-color: #edf8f7;
-    }
-}
-
 .left-menu {
     .main-logo {
         background-image: url(../assets/img/tamil_carving.jpg);
@@ -126,10 +122,9 @@ button {
         ion-list {
             .item-block {
                 border: none;
-                border-bottom: 1px solid #343d47;
                 color: #b8bdc0;
                 .item-inner {
-                    border: none;
+                    border-bottom: 1px solid #343d47;
                     ion-icon {
                         padding: 0px 10px;
                     }

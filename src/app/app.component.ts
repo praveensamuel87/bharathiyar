@@ -1,3 +1,5 @@
+import { ShareSvc } from './../pages/shared/shareSvc';
+import { AboutPage } from './../pages/about/about';
 import { SettingsPage } from './../pages/settings/settings';
 import { FavouritesPage } from './../pages/favourites/favourites';
 import { finalJSON } from './finalJson';
@@ -26,13 +28,16 @@ export class MyApp {
     public menu: MenuController,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public sqlStorageProvider: SqlStorageProvider
+    public sqlStorageProvider: SqlStorageProvider,
+    private _sharedSvc: ShareSvc
   ) {
     this.initializeApp();
     // set our app's pages
     this.pages = [
       { title: 'முகப்புப் பக்கம்', icon: 'ios-home-outline', component: HomePage },
-      { title: 'பிடித்தவை', icon: 'star-outline', component: FavouritesPage }
+      { title: 'பிடித்தவை', icon: 'star-outline', component: FavouritesPage },
+      { title: 'About', icon: 'ios-information-circle-outline', component: AboutPage },
+      { title: 'Share App', icon: 'md-share', component: FavouritesPage }
       //{ title: 'Settings', icon: 'ios-settings-outline', component: SettingsPage }
     ];
 
@@ -50,7 +55,11 @@ export class MyApp {
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component, { 'selectedMenu': page.title },{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
+    if (page.title === "Share App") {
+      this._sharedSvc.openShareSheet('I found this Bharathiyar Padalgal app interesting. பதிவிறக்க இங்கே கிளிக் செய்யவும் https://play.google.com/store/apps/details?id=com.bharathiyar.padalgal',null);
+    } else {
+      // navigate to the new page if it is not the current page
+      this.nav.setRoot(page.component, { 'selectedMenu': page.title });
+    }
   }
 }

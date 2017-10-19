@@ -3,20 +3,43 @@ search-page {
         margin: 10px 20px;
     }
     ion-card-header {
-        &.card-header-ios {
+        &.card-header-md {
             font-weight: bold;
-            background-color: #19b8a4;
-            color: white;
-            padding: 0 15px;
-            min-height: 50px;
-            line-height: 50px;
-            font-size: 1.5rem;
+            background-color: $secondaryHeading;
+            color: $backgroundNorml;
+            padding: 10px 15px;
+            text-align: center;
             ion-icon {
-                float: left;
-                line-height: 50px;
                 font-size: 2em;
-                padding-right: 10px;
+                display: block;
             }
         }
+    }
+    ion-card {
+        .item {
+            font-size: $bodyFontSize;
+            .item-inner {
+                border-bottom: 1px solid #dedede !important;
+            }
+        }
+    }
+    .info {
+        text-align: center;
+        margin-top: 15px;
+        padding: 15px;
+        ion-icon {
+            font-size: 10em;
+            text-align: center;
+            color: #dbe2e1;
+        }
+        .message {
+            $color: $secondaryHeading;
+            font-weight: bold;
+        }
+    }
+    .spinner-container {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
     }
 }

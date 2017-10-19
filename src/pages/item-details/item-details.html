@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content id="itemContent" (ionScroll)="onScrollEvent($event)">
+<ion-content id="itemContent" (ionScroll)="onScrollEvent($event)" overflow-scroll="true" has-bouncing="true">
   <ion-title #subHeader id="subHeader" class="secondary" text-center>{{selectedTitle}}</ion-title>
   <ion-list class="accordion">
     <ion-card *ngFor="let songsList of selectedChapters;">

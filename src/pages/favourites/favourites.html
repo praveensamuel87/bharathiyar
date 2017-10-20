@@ -3,13 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>பாரதியார் கவிதைகள்</ion-title>
+    <ion-title>{{ 'ABOUT' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content overflow-scroll="true">
 
-  <ion-title #subHeader id="subHeader" class="secondary" text-center>பிடித்தவை</ion-title>
+  <ion-title #subHeader id="subHeader" class="secondary" text-center>{{ 'FAV' | translate }}</ion-title>
   <ion-card *ngIf="favArray.length">
     <ion-list>
       <ion-item-sliding class="item-remove-animate" #slidingItem (ionSwipe)="removeFromFav(song,$index,slidingItem)" *ngFor="let song of favArray; let $index = index;"

@@ -10,7 +10,7 @@
     <ion-list>
       <button ion-item *ngFor="let p of pages" (click)="openPage(p)" detail-none>
           <ion-icon [name]="p.icon"></ion-icon>
-        <span>{{p.title}}</span>
+        <span>{{p.title | translate }}</span>
       </button>
     </ion-list>
   </ion-content>

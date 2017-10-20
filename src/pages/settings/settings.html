@@ -3,11 +3,22 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Settings</ion-title>
+    <ion-title>{{ 'SETTINGS' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content  overflow-scroll="true">
-settings template
-
+<ion-content overflow-scroll="true">
+  <ion-card-header>Language</ion-card-header>
+  <ion-card-content>
+    <ion-list radio-group [(ngModel)]="selectedLanguage">
+      <ion-item>
+        <ion-label>Tamil</ion-label>
+        <ion-radio value="ta" (ionSelect)="onLanguageChange('ta')"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>English</ion-label>
+        <ion-radio value="en" (ionSelect)="onLanguageChange('en')" checked></ion-radio>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
 </ion-content>

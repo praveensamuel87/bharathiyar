@@ -4,13 +4,14 @@ import { SettingsPage } from './../pages/settings/settings';
 import { FavouritesPage } from './../pages/favourites/favourites';
 import { finalJSON } from './finalJson';
 import { HomePage } from './../pages/home-page/home-page';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Injector } from '@angular/core';
 
 import { Platform, MenuController, Nav } from 'ionic-angular'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,19 +29,36 @@ export class MyApp {
     public menu: MenuController,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public sqlStorageProvider: SqlStorageProvider,
-    private _sharedSvc: ShareSvc
+    public sqlStorage: SqlStorageProvider,
+    private _sharedSvc: ShareSvc,
+    private translate: TranslateService
   ) {
     this.initializeApp();
     // set our app's pages
     this.pages = [
-      { title: 'முகப்புப் பக்கம்', icon: 'ios-home-outline', component: HomePage },
-      { title: 'பிடித்தவை', icon: 'star-outline', component: FavouritesPage },
-      { title: 'About', icon: 'ios-information-circle-outline', component: AboutPage },
-      { title: 'Share App', icon: 'md-share', component: FavouritesPage }
+      { title: 'HOMEPAGE', icon: 'ios-home-outline', component: HomePage },
+      { title: 'FAV', icon: 'star-outline', component: FavouritesPage },
+      { title: 'SETTINGS', icon: 'ios-settings-outline', component: SettingsPage },
+      { title: 'ABOUT', icon: 'ios-information-circle-outline', component: AboutPage },
+      { title: 'Share_App', icon: 'md-share', component: SettingsPage }
       //{ title: 'Settings', icon: 'ios-settings-outline', component: SettingsPage }
     ];
+    this.initTranslate();
+  }
 
+
+  initTranslate() {
+    this.sqlStorage.getSettings('lang').then(data => {
+      this.translate.setDefaultLang(data);
+    });
+    // Set the default language for translation strings, and the current language.
+
+
+    if (this.translate.getBrowserLang() !== undefined) {
+      //this.translate.use(this.translate.getBrowserLang());
+    } else {
+      // this.translate.use('en'); // Set your language here
+    }
   }
 
   initializeApp() {
@@ -55,11 +73,13 @@ export class MyApp {
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
-    if (page.title === "Share App") {
-      this._sharedSvc.openShareSheet('I found this Bharathiyar Padalgal app interesting. பதிவிறக்க இங்கே கிளிக் செய்யவும் https://play.google.com/store/apps/details?id=com.bharathiyar.padalgal',null);
+    if (page.title === "HOMEPAGE") {
+      //this.nav.setRoot(page.component, { 'selectedMenu': page.title });
+      this.nav.popToRoot({});
+    } else if (page.title === "Share_App") {
+      this._sharedSvc.openShareSheet('I found this Bharathiyar Padalgal app interesting. பதிவிறக்க இங்கே கிளிக் செய்யவும் https://play.google.com/store/apps/details?id=com.bharathiyar.padalgal', null);
     } else {
-      // navigate to the new page if it is not the current page
-      this.nav.setRoot(page.component, { 'selectedMenu': page.title });
+      this.nav.push(page.component,{});
     }
   }
 }

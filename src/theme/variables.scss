@@ -54,7 +54,7 @@ $breakpoints: ( mobile-min: 479px, mobile-max: 576px, tablet-min: 768px, large-m
 @mixin bp($device) {
     $width: map-get($breakpoints, $device);
     @if $device==mobile-max {
-        @media (max-width: $width) {
+        @media (min-width: '480px' ) and (max-width: $width) {
             @content;
         }
     }

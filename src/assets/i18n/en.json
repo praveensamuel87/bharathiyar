@@ -1,5 +1,10 @@
 {
     "HELLO": "Hello",
     "TITLE": "Bharathiyar Kavithaigal",
-    "HOMEPAGE": "Home Page"
+    "HOMEPAGE": "Home Page",
+    "ABOUT": "About",
+    "Share_App": "Share App",
+    "SEARCH": "Search Page",
+    "FAV": "Favourites",
+    "SETTINGS": "Settings"
 }

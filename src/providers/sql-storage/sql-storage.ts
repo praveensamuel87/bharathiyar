@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
@@ -5,6 +6,7 @@ import 'rxjs/add/operator/map';
 
 /*
   Generated class for the SqlStorageProvider provider.
+
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
@@ -14,7 +16,7 @@ export class SqlStorageProvider {
   storage: any;
   DB_NAME: string = '__ionicstorage';
 
-  constructor(public platform: Platform, public sqlite: SQLite) {
+  constructor(public platform: Platform, public sqlite: SQLite, private translate: TranslateService) {
     console.log('Hello SqlStorageProvider Provider');
     this.platform.ready().then(() => {
       //comment this to running in browser
@@ -31,6 +33,13 @@ export class SqlStorageProvider {
       .catch(err => {
         console.error('Unable to create initial storage tables', err.tx, err.err);
       });
+
+    this.query('CREATE TABLE IF NOT EXISTS settings (key text PRIMARY KEY, value text)')
+      .catch(err => {
+        console.error('Unable to create initial settings tables', err.tx, err.err);
+      });
+
+    this.setDefaultLang();
   }
   /**
        * Perform an arbitrary SQL operation on the database. Use this method
@@ -92,4 +101,29 @@ export class SqlStorageProvider {
     return this.query('delete from favourites where key = ?', [key]);
   }
 
+  /** SET the settings value in the database for the given key. */
+  setSettings(key: string, value: string): Promise<any> {
+    return this.query('insert into settings(key, value) values (?, ?)', [key, value]);
+  }
+
+  /** GET the settings value in the database identified by the given key. */
+  getSettings(key: string): Promise<any> {
+    return this.query('select key, value from settings where key = ? limit 1', [key])
+      .then(data => {
+        if (data.res.rows.length > 0) {
+          return data.res.rows.item(0).value;
+        }
+        return "";
+      });
+  }
+
+  /** REMOVE the value in the database for the given key. */
+  removeSettings(key: string): Promise<any> {
+    return this.query('delete from settings where key = ?', [key]);
+  }
+  setDefaultLang() {
+    this.getSettings('lang').then(data => {
+      this.translate.setDefaultLang(data ? data : 'en');
+    });
+  }
 }

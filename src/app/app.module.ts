@@ -20,8 +20,19 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
+import { Http, HttpModule } from '@angular/http';
 import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
 import { HomePage } from '../pages/home-page/home-page';
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// The translate loader needs to know where to load i18n files
+// in Ionic's static asset pipeline.
+export function HttpLoaderFactory(http: Http) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 
 @NgModule({
   declarations: [
@@ -40,7 +51,15 @@ import { HomePage } from '../pages/home-page/home-page';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp,{iconMode: 'md'})
+    HttpModule,
+    IonicModule.forRoot(MyApp,{iconMode: 'md'}),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [Http]
+      }
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

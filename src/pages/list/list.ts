@@ -18,6 +18,7 @@ export class ListPage {
   isShake: boolean = false;
   showBackToTop: boolean = false;
   searchKeyWord: string = '';
+  hideNow: boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public songsModel: SongsModel, private _sharedSvc: ShareSvc) {
     this.init(navParams.get('item'));
     this.searchKeyWord = navParams.get('searchKeyWord');
@@ -75,11 +76,13 @@ export class ListPage {
   }
 
   shareSS() {
+    this.hideNow = true;
     this._sharedSvc.takeScreenShot().then((response) => {
-      this._sharedSvc.openShareSheet("வணக்கம். பாரதியாரின் இந்த கவிதை/பாடல் சுவாரசியமாக இருக்கிறது.", response.URI);
+      this.hideNow = false;
+      this._sharedSvc.openShareSheet("வணக்கம். பாரதியாரின் இந்த கவிதை/பாடல் சுவாரசியமாக உள்ளது. இந்த பாடல் மற்றும் பல பாடல்களை படிக்க இந்த ஆப்ஐ பதிவிரக்கம் பண்ணவும் https://play.google.com/store/apps/details?id=com.bharathiyar.padalgal ", response.URI);
       //this.shareUsingShareSheet(response.URI);
     }, () => {
-      this.presentToast('இந்த நேரத்தில் பகிர்ந்து கொள்ள முடியவில்லை');
+      this.presentToast('மன்னிக்கவும். இந்த நேரத்தில் பகிர்ந்து கொள்ள முடியவில்லை.');
     });
   }
 

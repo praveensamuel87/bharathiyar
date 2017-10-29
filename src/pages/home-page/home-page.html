@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="card-background-page"  overflow-scroll="true">
-  <ion-card class="thumbnail" *ngFor="let page of pages;let $isOdd=odd;let $isEven=even" (click)="itemTapped($event, page)">
+  <ion-card class="thumbnail" tappable *ngFor="let page of pages;let $isOdd=odd;let $isEven=even" (tap)="itemTapped($event, page)">
     <ion-card-content>
       <div class="card-title">{{page.title}}</div>
       <div class="card-numbers">

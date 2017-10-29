@@ -17,7 +17,7 @@ export class HomePage {
   public pages: Array<{ title: any, value: any, totalListing: any }> = [];
   value: any;
   songDB: Array<any> = [];
- 
+  listView: boolean = false;
   defaultImg: string = "assets/img/bharathi_song_banner.jpg";
   imageLocation: any = "assets/img/";
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public songsModel: SongsModel, private _loader: LoaderSvc) {
@@ -27,8 +27,8 @@ export class HomePage {
 
   init() {
     let index = 0;
-    finalJSON.sections.push(otherSongJSON);
     finalJSON.sections.push(kaaviyamJSON);
+    finalJSON.sections.push(otherSongJSON);
     for (let section of finalJSON.sections) {
       let totalSongs = section.songs ? section.songs.length : 0;
       let sectionObj = { "chapters": [], "songs": [], "name": "" };

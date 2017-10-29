@@ -33,8 +33,8 @@ export class SearchPage {
 
 
   onInput(value) {
-    if (this.myInput && this.myInput.length >= 3) {
-      this.searchKeyWord = this.myInput;
+    if (this.myInput && this.myInput.trim().length >= 3) {
+      this.searchKeyWord = this.myInput.trim();
       this.isSearching = true;
       //this.loader.present();
       

@@ -2,16 +2,25 @@ search-page {
     .searchSummary {
         margin: 10px 20px;
     }
+    ion-content {
+        &.content-md {
+            background-color: #fff;
+        }
+    }
     ion-card-header {
         &.card-header-md {
             font-weight: bold;
             background-color: $secondaryHeading;
             color: $backgroundNorml;
-            padding: 10px 15px;
+            padding: 5px 15px;
             text-align: center;
             ion-icon {
                 font-size: 2em;
-                display: block;
+            }
+            div {
+                display: inline-block;
+                position: relative;
+                top: -5px;
             }
         }
     }
@@ -20,6 +29,7 @@ search-page {
             font-size: $bodyFontSize;
             .item-inner {
                 border-bottom: 1px solid #dedede !important;
+                margin-left: 5px!important;
             }
         }
     }

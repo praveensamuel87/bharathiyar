@@ -4,7 +4,17 @@
     "HOMEPAGE": "Home Page",
     "ABOUT": "About",
     "Share_App": "Share App",
+    "Rate_App": "Rate App",
     "SEARCH": "Search Page",
     "FAV": "Favourites",
-    "SETTINGS": "Settings"
+    "SETTINGS": "Settings",
+    "settings_lang": "Menu Language",
+    "tamil": "Tamil",
+    "english": "English",
+    "search_results": "Search Results",
+    "keyword": "The Keyword you searched",
+    "not_match": "does not match with any songs or poems.",
+    "search_info": "Type minimum of three letters to search.",
+    "remove": "Remove",
+    "no_fav_msg": "You have not marked any songs as favourite."
 }

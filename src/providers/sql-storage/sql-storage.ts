@@ -103,7 +103,7 @@ export class SqlStorageProvider {
 
   /** SET the settings value in the database for the given key. */
   setSettings(key: string, value: string): Promise<any> {
-    return this.query('insert into settings(key, value) values (?, ?)', [key, value]);
+    return this.query('REPLACE into settings(key, value) values (?, ?)', [key, value]);
   }
 
   /** GET the settings value in the database identified by the given key. */

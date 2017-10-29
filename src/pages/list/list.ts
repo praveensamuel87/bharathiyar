@@ -3,6 +3,8 @@ import { SongsModel } from './../shared/songsModel';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, FabContainer, Content } from 'ionic-angular';
 import { SqlStorageProvider } from '../../providers/sql-storage/sql-storage';
+import { AppRate } from '@ionic-native/app-rate';
+
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -19,9 +21,32 @@ export class ListPage {
   showBackToTop: boolean = false;
   searchKeyWord: string = '';
   hideNow: boolean = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public songsModel: SongsModel, private _sharedSvc: ShareSvc) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public songsModel: SongsModel, private _sharedSvc: ShareSvc, private appRate: AppRate) {
     this.init(navParams.get('item'));
     this.searchKeyWord = navParams.get('searchKeyWord');
+    this.appRate.preferences = {
+      storeAppURL: {
+        android: 'market://details?id=com.bharathiyar.padalgal'
+      },
+      customLocale: {
+        title: "Rate our App",
+        message: "If you love our App, please take a moment to rate it.",
+        cancelButtonLabel: 'Never',
+        rateButtonLabel: 'Rate it!',
+        laterButtonLabel: 'Ask Later'
+      },
+      usesUntilPrompt: 3,
+      callbacks: {
+        onButtonClicked: (buttonIndex) => {
+          if (buttonIndex === 2) {
+            this.appRate.preferences.usesUntilPrompt = this.appRate.preferences.usesUntilPrompt + 15;
+          }
+        },
+        onRateDialogShow: (callback) => {
+          return;
+        }
+      }
+    }
   }
 
   init(id) {
@@ -79,7 +104,7 @@ export class ListPage {
     this.hideNow = true;
     this._sharedSvc.takeScreenShot().then((response) => {
       this.hideNow = false;
-      this._sharedSvc.openShareSheet("வணக்கம். பாரதியாரின் இந்த கவிதை/பாடல் சுவாரசியமாக உள்ளது. இந்த பாடல் மற்றும் பல பாடல்களை படிக்க இந்த ஆப்ஐ பதிவிரக்கம் பண்ணவும் https://play.google.com/store/apps/details?id=com.bharathiyar.padalgal ", response.URI);
+      this._sharedSvc.openShareSheet("வணக்கம். பாரதியாரின் இந்த கவிதை/பாடல் சுவாரசியமாக உள்ளது. இந்த பாடல் மற்றும் பாரதியாரின் மற்ற பாடல்களை படிக்க இந்த ஆப்ஐ பதிவிரக்கம் பண்ணவும். https://play.google.com/store/apps/details?id=com.bharathiyar.padalgal ", response.URI);
       //this.shareUsingShareSheet(response.URI);
     }, () => {
       this.presentToast('மன்னிக்கவும். இந்த நேரத்தில் பகிர்ந்து கொள்ள முடியவில்லை.');
@@ -130,5 +155,8 @@ export class ListPage {
     } else {
       this.showBackToTop = false;
     }
+  }
+  ionViewDidEnter() {
+    this.appRate.promptForRating(false);
   }
 }

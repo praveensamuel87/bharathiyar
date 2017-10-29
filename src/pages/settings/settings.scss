@@ -1,3 +1,19 @@
 settings-page {
-
+    ion-content {
+        &.content-md {
+            background-color: #fff;
+            ion-list-header {
+                &.list-header-md {
+                    font-size: 1.6rem;
+                    margin: 0;
+                    font-weight: 400;
+                    color: black;
+                    font-style: italic;
+                }
+                ion-item {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+    }
 }

@@ -20,6 +20,7 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
+import { AppRate } from '@ionic-native/app-rate';
 import { Http, HttpModule } from '@angular/http';
 import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
 import { HomePage } from '../pages/home-page/home-page';
@@ -86,7 +87,8 @@ export function HttpLoaderFactory(http: Http) {
     CustomfilterBy,
     LoaderSvc,
     ShareSvc,
-    HighlightifyPipe
+    HighlightifyPipe,
+    AppRate
   ]
 })
 export class AppModule {}

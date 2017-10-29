@@ -4,7 +4,7 @@ import { SettingsPage } from './../pages/settings/settings';
 import { FavouritesPage } from './../pages/favourites/favourites';
 import { finalJSON } from './finalJson';
 import { HomePage } from './../pages/home-page/home-page';
-import { Component, ViewChild, Injector } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { Platform, MenuController, Nav } from 'ionic-angular'
 
@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
+import { AppRate } from '@ionic-native/app-rate';
 
 @Component({
   templateUrl: 'app.html'
@@ -31,7 +32,8 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public sqlStorage: SqlStorageProvider,
     private _sharedSvc: ShareSvc,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private _appRate: AppRate
   ) {
     this.initializeApp();
     // set our app's pages
@@ -40,12 +42,18 @@ export class MyApp {
       { title: 'FAV', icon: 'star-outline', component: FavouritesPage },
       { title: 'SETTINGS', icon: 'ios-settings-outline', component: SettingsPage },
       { title: 'ABOUT', icon: 'ios-information-circle-outline', component: AboutPage },
-      { title: 'Share_App', icon: 'md-share', component: SettingsPage }
-      //{ title: 'Settings', icon: 'ios-settings-outline', component: SettingsPage }
+      { title: 'Share_App', icon: 'md-share', component: SettingsPage },
+      { title: 'Rate_App', icon: 'md-star-half', component: SettingsPage }
     ];
     this.initTranslate();
-  }
+    this._appRate.preferences = {
+      storeAppURL: {
+        android: 'market://details?id=com.bharathiyar.padalgal'
+      },
+      usesUntilPrompt: 3
+    }
 
+  }
 
   initTranslate() {
     this.sqlStorage.getSettings('lang').then(data => {
@@ -78,8 +86,10 @@ export class MyApp {
       this.nav.popToRoot({});
     } else if (page.title === "Share_App") {
       this._sharedSvc.openShareSheet('I found this Bharathiyar Padalgal app interesting. பதிவிறக்க இங்கே கிளிக் செய்யவும் https://play.google.com/store/apps/details?id=com.bharathiyar.padalgal', null);
+    } else if (page.title === "Rate_App"){
+      this._appRate.navigateToAppStore()
     } else {
-      this.nav.push(page.component,{});
+      this.nav.push(page.component, {});
     }
   }
 }

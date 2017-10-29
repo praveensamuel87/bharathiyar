@@ -19,26 +19,24 @@
       <ion-card-header>
         <ion-icon name="information-circle"></ion-icon>
         <div>
-          தேடல் முடிவுகள் ({{serachResult.length}})</div>
+          {{'search_results' | translate}} ({{serachResult.length}})</div>
       </ion-card-header>
-      <ion-card-content>
       <ion-list>
         <button ion-item *ngFor="let song of serachResult" (click)="itemTapped($event, song)">
-          <ion-icon name="musical-note" item-start></ion-icon>
+          <ion-icon name="book" item-start></ion-icon>
           {{song.songName}}
         </button>
       </ion-list>
-      </ion-card-content>
     </ion-card>
   </div>
   <div *ngIf="!serachResult.length && searchKeyWord && !isSearching" class="info">
     <ion-icon name="md-search"></ion-icon>
-    <div class="message"> நீங்கள் தேடிய - {{searchKeyWord}} - எந்தொரு பாடலுடனோ  கவிதைவுடனோ பொருந்தவில்லை
+    <div class="message"> {{'keyword' | translate}} - {{searchKeyWord}} - {{'not_match' | translate}}
     </div>
   </div>
   <div class="info" *ngIf="!searchKeyWord && !isSearching">
     <ion-icon name="md-search"></ion-icon>
-    <div class="message"> குறைந்தபட்சம் மூன்று எழுத்துக்களை தட்டச்சு பண்ணவும்.
+    <div class="message"> {{'search_info' | translate}}
     </div>
   </div>
 

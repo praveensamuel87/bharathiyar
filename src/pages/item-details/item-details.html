@@ -11,7 +11,7 @@
   <ion-title #subHeader id="subHeader" class="secondary" text-center>{{selectedTitle}}</ion-title>
   <ion-list class="accordion">
     <ion-card *ngFor="let songsList of selectedChapters;">
-      <ion-card-header (click)="songsList.show = !songsList.show">
+      <ion-card-header (click)="songsList.show = !songsList.show" tappable>
 
         <ion-icon name="ios-folder-outline" float-left></ion-icon>
         <div class="accordionHeading"> {{songsList.name}} ({{songsList.songs.length}})</div>

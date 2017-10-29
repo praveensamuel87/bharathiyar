@@ -28,23 +28,18 @@ page-hello-ionic {
                 background-color: #d9444a; //background-image: url(../../assets/img/red_pattern.png);
             }
             &.thumbnail:nth-child(2) {
-                border-color: #FF9800;
                 background-color: #ecc021; //background-image: url(../../assets/img/purple_pattern.png);
             }
             &.thumbnail:nth-child(3) {
-                border-color: #C2185B;
                 background-color: #5cae42; //background-image: url(../../assets/img/green_pattern.png);
             }
             &.thumbnail:nth-child(4) {
-                border-color: #03A9F4;
                 background-color: #387bc1; //background-image: url(../../assets/img/yellow_pattern.png);
             }
             &.thumbnail:nth-child(5) {
-                border-color: #7B1FA2;
                 background-color: #83489a; //background-image: url(../../assets/img/blue_pattern.png);
             }
             &.thumbnail:nth-child(6) {
-                border-color: #388E3C;
                 margin-bottom: 4%;
                 background-color: #afbb3d; //background-image: url(../../assets/img/pink_pattern.png);
             }
@@ -57,6 +52,9 @@ page-hello-ionic {
             padding-top: 5px;
             line-height: 1.2;
             white-space: unset;
+            @include bp(tablet-min) {
+                font-size: 1.5em;
+            }
         }
         .card-subtitle {
             font-size: 0.9em;
@@ -66,6 +64,9 @@ page-hello-ionic {
             position: absolute;
             bottom: 15%;
             left: 0;
+            @include bp(tablet-min) {
+                font-size: 1.4em;
+            }
             ion-icon {
                 padding-right: 5px;
             }
@@ -78,6 +79,9 @@ page-hello-ionic {
             position: absolute;
             bottom: 30%;
             left: 0;
+            @include bp(tablet-min) {
+                font-size: 3.0em;
+            }
             ion-icon {
                 padding-right: 5px;
             }

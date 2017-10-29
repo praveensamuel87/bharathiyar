@@ -1,3 +1,4 @@
+import { SearchPage } from './../search/search';
 import { SqlStorageProvider } from './../../providers/sql-storage/sql-storage';
 import { SongsModel } from './../shared/songsModel';
 import { ListPage } from './../list/list';
@@ -41,6 +42,10 @@ export class FavouritesPage {
 
   scrollToTop() {
     this.content.scrollToTop();
+  }
+
+  openSearch() {
+    this.navCtrl.push(SearchPage);
   }
 
 }

@@ -13,7 +13,7 @@ export class ShareSvc {
 
     }
     presentToast(message: any) {
-        this.toast.show(message, '5000', 'bottom').subscribe(
+        this.toast.show(message, '3000', 'bottom').subscribe(
             toast => {
                 //console.log(toast);
             }

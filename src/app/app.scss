@@ -27,7 +27,7 @@ ion-app.ios {
 }
 
 .toolbar-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     color: #fff;
 }
@@ -130,6 +130,7 @@ ion-title {
             .item-block {
                 border: none;
                 color: #b8bdc0;
+                padding-left: 10px;
                 .item-inner {
                     border-bottom: 1px solid #343d47;
                     ion-icon {

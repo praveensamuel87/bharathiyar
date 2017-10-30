@@ -84,6 +84,8 @@ export class ListPage {
     this.sqlStorage.getFav(index).then(data => {
       if (data) {
         this.isFavourite = true;
+      } else {
+        this.isFavourite = false;
       }
     });
   }

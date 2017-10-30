@@ -10,7 +10,7 @@
 <ion-content overflow-scroll="true">
   <ion-list radio-group [(ngModel)]="selectedLanguage">
     <ion-list-header>
-        {{ 'settings_lang' | translate }}
+      {{ 'settings_lang' | translate }}
     </ion-list-header>
     <ion-item>
       <ion-label>{{ 'tamil' | translate }}</ion-label>
@@ -21,4 +21,24 @@
       <ion-radio value="en" (ionSelect)="onLanguageChange('en')" checked></ion-radio>
     </ion-item>
   </ion-list>
+  <!--<ion-item>
+    <ion-label>{{ 'Notifications' | translate }}</ion-label>
+    <ion-toggle [(ngModel)]="notification" (ionChange)="scheduleNotification(notification)"></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{ 'Time' | translate }}</ion-label>
+    <ion-datetime [disabled]="!notification" displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notificationTime" (ionChange)="timeChange($event)"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{ 'Day' | translate }}</ion-label>
+    <ion-select [disabled]="!notification" interface="action-sheet" multiple="true" [(ngModel)]="notificationDay" (ionChange)="scheduleNotification(true)">
+      <ion-option value="1">{{ 'Monday' | translate }}</ion-option>
+      <ion-option value="2">{{ 'Tuesday' | translate }}</ion-option>
+      <ion-option value="3">{{ 'Wednesday' | translate }}</ion-option>
+      <ion-option value="4">{{ 'Thursday' | translate }}</ion-option>
+      <ion-option value="5">{{ 'Friday' | translate }}</ion-option>
+      <ion-option value="6">{{ 'Saturday' | translate }}</ion-option>
+      <ion-option value="0">{{ 'Sunday' | translate }}</ion-option>
+    </ion-select>
+  </ion-item>-->
 </ion-content>

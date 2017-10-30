@@ -123,7 +123,7 @@ export class SqlStorageProvider {
   }
   setDefaultLang() {
     this.getSettings('lang').then(data => {
-      this.translate.setDefaultLang(data ? data : 'en');
+      this.translate.setDefaultLang(data ? data : 'ta');
     });
   }
 }

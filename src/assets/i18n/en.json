@@ -16,5 +16,15 @@
     "not_match": "does not match with any songs or poems.",
     "search_info": "Type minimum of three letters to search.",
     "remove": "Remove",
-    "no_fav_msg": "You have not marked any songs as favourite."
+    "no_fav_msg": "You have not marked any songs as favourite.",
+    "Notifications":"Notifications",
+    "Time": "Time",
+    "Day": "Day",
+    "Monday":"Monday",
+    "Tuesday":"Tuesday",
+    "Wednesday":"Wednesday",
+    "Thursday":"Thursday",
+    "Friday":"Friday",
+    "Saturday":"Saturday",
+    "Sunday":"Sunday"
 }

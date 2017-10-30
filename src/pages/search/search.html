@@ -22,7 +22,7 @@
           {{'search_results' | translate}} ({{serachResult.length}})</div>
       </ion-card-header>
       <ion-list>
-        <button ion-item *ngFor="let song of serachResult" (click)="itemTapped($event, song)">
+        <button ion-item *ngFor="let song of serachResult" (tap)="itemTapped($event, song)">
           <ion-icon name="book" item-start></ion-icon>
           {{song.songName}}
         </button>

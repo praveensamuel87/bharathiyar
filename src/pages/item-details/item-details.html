@@ -11,7 +11,7 @@
   <ion-title #subHeader id="subHeader" class="secondary" text-center>{{selectedTitle}}</ion-title>
   <ion-list class="accordion">
     <ion-card *ngFor="let songsList of selectedChapters;">
-      <ion-card-header (click)="songsList.show = !songsList.show" tappable>
+      <ion-card-header (tap)="songsList.show = !songsList.show" tappable>
 
         <ion-icon name="ios-folder-outline" float-left></ion-icon>
         <div class="accordionHeading"> {{songsList.name}} ({{songsList.songs.length}})</div>
@@ -22,12 +22,12 @@
       <ion-list [class.close]="!songsList.show" [class.open]="songsList.show">
         <ion-item-sliding #item *ngFor="let song of songsList.songs; let $index = index">
           <!--<ion-item-options side="right">
-            <button ion-button (click)="favClick(item, song.index)">
+            <button ion-button (tap)="favClick(item, song.index)">
                     <ion-icon ios="ios-heart" md="md-heart" isActive="true" class="favorite"></ion-icon></button>
-            <button ion-button (click)="shreUsingShareSheet(item, song)">
+            <button ion-button (tap)="shreUsingShareSheet(item, song)">
                         <ion-icon name="share" class="share"></ion-icon></button>
           </ion-item-options>-->
-          <button ion-item (click)="itemTapped($event, song.index)">
+          <button ion-item (tap)="itemTapped($event, song.index)">
                 <ion-icon name="book" item-start></ion-icon>
                 {{song.name}}
               </button>
@@ -35,7 +35,7 @@
       </ion-list>
     </ion-card>
     <ion-card *ngIf="selectedSongs.length !== 0">
-      <ion-card-header (click)="showOtherSongList = !showOtherSongList">
+      <ion-card-header (tap)="showOtherSongList = !showOtherSongList">
 
         <ion-icon name="ios-folder-outline" float-left></ion-icon>
         <div class="accordionHeading"> மற்றவை ({{selectedSongs.length}})</div>
@@ -45,12 +45,12 @@
       <ion-list [class.close]="!showOtherSongList" [class.open]="showOtherSongList">
         <ion-item-sliding #item *ngFor="let key of selectedSongs; let $index = index;">
           <!--<ion-item-options side="right">
-            <button ion-button (click)="favClick(item, key.index)">
+            <button ion-button (tap)="favClick(item, key.index)">
                   <ion-icon ios="ios-heart" md="md-heart" isActive="true" class="favorite active"></ion-icon></button>
-            <button ion-button (click)="shreUsingShareSheet(item, key)">
+            <button ion-button (tap)="shreUsingShareSheet(item, key)">
                       <ion-icon name="share" class="share"></ion-icon></button>
           </ion-item-options>-->
-          <button ion-item (click)="itemTapped($event, key.index)">
+          <button ion-item (tap)="itemTapped($event, key.index)">
                     <ion-icon name="book" item-start></ion-icon>
                     {{key.name}}
                   </button>
@@ -60,10 +60,10 @@
   </ion-list>
   <!--  <ion-fab top right>
 
-    <button [hidden]="!backToTopVisible" ion-fab (click)="scrollToTop()"><ion-icon ios="ios-arrow-dropup-circle" md="md-arrow-dropup-circle"></ion-icon></button>
+    <button [hidden]="!backToTopVisible" ion-fab (tap)="scrollToTop()"><ion-icon ios="ios-arrow-dropup-circle" md="md-arrow-dropup-circle"></ion-icon></button>
   </ion-fab> -->
 
   <ion-fab bottom right>
-    <button ion-fab (click)="openSearch()"><ion-icon name="search"></ion-icon></button>
+    <button ion-fab (tap)="openSearch()"><ion-icon name="search"></ion-icon></button>
   </ion-fab>
 </ion-content>

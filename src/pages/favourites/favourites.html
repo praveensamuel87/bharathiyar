@@ -14,12 +14,12 @@
     <ion-list>
       <ion-item-sliding class="item-remove-animate" #slidingItem (ionSwipe)="removeFromFav(song,$index,slidingItem)" *ngFor="let song of favArray; let $index = index;"
         [class.remove]="song.isRemoved">
-        <button ion-item (click)="itemTapped($event, song.key)">
+        <button ion-item (tap)="itemTapped($event, song.key)">
           <ion-icon name="book" item-start></ion-icon>
           {{song.value}}
         </button>
         <ion-item-options side="right">
-          <button ion-button color="danger" expandable (click)="removeFromFav(song,$index,slidingItem)">
+          <button ion-button color="danger" expandable (tap)="removeFromFav(song,$index,slidingItem)">
             <ion-icon name="md-trash"></ion-icon>
             {{'remove' | translate }}
           </button>
@@ -34,6 +34,6 @@
     </div>
   </div>
   <ion-fab right bottom>
-      <button ion-fab (click)="openSearch()"><ion-icon ios="ios-search" md="md-search"></ion-icon></button>
+      <button ion-fab (tap)="openSearch()"><ion-icon ios="ios-search" md="md-search"></ion-icon></button>
     </ion-fab>
 </ion-content>

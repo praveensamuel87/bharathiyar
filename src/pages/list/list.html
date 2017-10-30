@@ -8,7 +8,7 @@
 
 </ion-header>
 
-<ion-content overflow-scroll="true" (click)="closeFab(fab, $event)" [class.shake]="isShake" (ionScroll)="onScroll($event)" tappable>
+<ion-content overflow-scroll="true" (tap)="closeFab(fab, $event)" [class.shake]="isShake" (ionScroll)="onScroll($event)" tappable>
   <div (swipe)="swipeEvent($event)">
     <ion-list>
       <div>
@@ -23,16 +23,16 @@
         <ion-icon name="add"></ion-icon>
       </button>
       <ion-fab-list side="top">
-        <button ion-fab (click)="favClick(selectedSong)" class="favourite" [class.active]="isFavourite">
+        <button ion-fab (tap)="favClick(selectedSong)" class="favourite" [class.active]="isFavourite">
           <ion-icon [name]="isFavourite? 'star' : 'star' "></ion-icon>
         </button>
-        <button ion-fab (click)="shareSS()" class="share">
+        <button ion-fab (tap)="shareSS()" class="share">
           <ion-icon name="share"></ion-icon>
         </button>
       </ion-fab-list>
     </ion-fab>
     <div *ngIf="showBackToTop">
-      <button class="backToTop" ion-button (click)="scrollToTop()">
+      <button class="backToTop" ion-button (tap)="scrollToTop()">
         <ion-icon name="ios-arrow-dropup-circle-outline"></ion-icon>
       </button>
     </div>

@@ -8,7 +8,7 @@
 
   <ion-content class="no-scroll">
     <ion-list>
-      <button ion-item *ngFor="let p of pages" (click)="openPage(p)" detail-none>
+      <button ion-item *ngFor="let p of pages" (tap)="openPage(p)" detail-none>
           <ion-icon [name]="p.icon"></ion-icon>
         <span>{{p.title | translate }}</span>
       </button>

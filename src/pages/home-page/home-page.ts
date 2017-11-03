@@ -80,7 +80,7 @@ export class HomePage {
   itemTapped(event, page) {
     this.navCtrl.push(ItemDetailsPage, {
       item: page,
-    }, { animate: true, direction: 'forward', animation: 'transition', easing: 'ease-in-out' });
+    });
   }
 
   openSearch() {

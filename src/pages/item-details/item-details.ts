@@ -1,4 +1,3 @@
-import { SongsModel } from './../shared/songsModel';
 import { SearchPage } from './../search/search';
 import { ListPage } from './../list/list';
 import { Component, ViewChild } from '@angular/core';
@@ -24,7 +23,7 @@ export class ItemDetailsPage {
   loader = this.loadingCtrl.create({
     content: "Loading..."
   });
-  constructor(public navCtrl: NavController, public navParams: NavParams, public socialSharing: SocialSharing, public loadingCtrl: LoadingController, public songsModel: SongsModel) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public socialSharing: SocialSharing, public loadingCtrl: LoadingController) {
     this.loader.present();
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedSection = navParams.get('item').value;

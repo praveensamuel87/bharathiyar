@@ -14,7 +14,6 @@ import { MyApp } from './app.component';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Toast } from '@ionic-native/toast';
 import { Screenshot } from '@ionic-native/screenshot';
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -37,8 +36,7 @@ export function HttpLoaderFactory(http: Http) {
 
 @NgModule({
   declarations: [
-    MyApp,
-    HelloIonicPage,
+    MyApp,    
     ItemDetailsPage,
     ListPage,
     HomePage,
@@ -53,7 +51,7 @@ export function HttpLoaderFactory(http: Http) {
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp,{iconMode: 'md'}),
+    IonicModule.forRoot(MyApp,{iconMode: 'md',pageTransition: 'md-transition'}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -65,7 +63,6 @@ export function HttpLoaderFactory(http: Http) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HelloIonicPage,
     ItemDetailsPage,
     ListPage,
     HomePage,

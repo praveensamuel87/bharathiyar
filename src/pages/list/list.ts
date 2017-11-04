@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { ShareSvc } from './../shared/shareSvc';
 import { SongsModel } from './../shared/songsModel';
 import { Component, ViewChild } from '@angular/core';
@@ -11,6 +12,7 @@ import { AppRate } from '@ionic-native/app-rate';
 })
 export class ListPage {
   @ViewChild(Content) content: Content;
+  @ViewChild('fab') fab:FabContainer;
   selectedSong: any;
   selectedPallavi: any;
   selectedSaranam: any;
@@ -21,7 +23,7 @@ export class ListPage {
   showBackToTop: boolean = false;
   searchKeyWord: string = '';
   hideNow: boolean = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public songsModel: SongsModel, private _sharedSvc: ShareSvc, private appRate: AppRate) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public songsModel: SongsModel, private _sharedSvc: ShareSvc, private appRate: AppRate, private translate: TranslateService) {
     this.init(navParams.get('item'));
     this.searchKeyWord = navParams.get('searchKeyWord');
     this.appRate.preferences = {
@@ -65,18 +67,27 @@ export class ListPage {
     if (this.isFavourite) {
       this.sqlStorage.removeFav(song.id);
       this.isFavourite = false;
-      this.presentToast('பிடித்த பட்டியலில் இருந்து நீக்கப்பட்டுள்ளது.');
+      this.translate.get('fav_removed').subscribe(
+        value => {
+          this.presentToast(value);
+        }
+      );
     }
     else {
       this.isFavourite = true;
       this.sqlStorage.setFav(song.id, song.songName);
-      this.presentToast('பிடித்த பட்டியலில் சேர்க்கப்பட்டுள்ளது');
+      this.translate.get('fav_added').subscribe(
+        value => {
+          this.presentToast(value);
+        }
+      );
+
     }
   }
 
-  closeFab(fab: FabContainer, e: Event) {
+  closeFab(fab: FabContainer , e: Event) {
     if (e.srcElement.nodeName !== "ION-ICON") {
-      fab.close();
+     fab.close();
     }
   }
 
@@ -103,13 +114,17 @@ export class ListPage {
   }
 
   shareSS() {
+    this.scrollToTop();
     this.hideNow = true;
     this._sharedSvc.takeScreenShot().then((response) => {
       this.hideNow = false;
       this._sharedSvc.openShareSheet("வணக்கம். பாரதியாரின் இந்த கவிதை/பாடல் சுவாரசியமாக உள்ளது. இந்த பாடல் மற்றும் பாரதியாரின் மற்ற பாடல்களை படிக்க இந்த ஆப்ஐ பதிவிரக்கம் பண்ணவும். https://play.google.com/store/apps/details?id=com.bharathiyar.padalgal ", response.URI);
-      //this.shareUsingShareSheet(response.URI);
     }, () => {
-      this.presentToast('மன்னிக்கவும். இந்த நேரத்தில் பகிர்ந்து கொள்ள முடியவில்லை.');
+      this.translate.get('share_error').subscribe(
+        value => {
+          this.presentToast(value);
+        }
+      );
     });
   }
 
@@ -148,6 +163,7 @@ export class ListPage {
     setTimeout(() => {
       this.isShake = false;
       this.content.scrollToTop();
+      this.fab.close();
     }, 700);
   }
 

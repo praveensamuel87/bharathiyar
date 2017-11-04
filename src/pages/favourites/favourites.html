@@ -1,30 +1,37 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>{{ 'FAV' | translate }}</ion-title>
+    <ion-buttons right>
+      <button ion-button *ngIf="isOnHoldPress" (click)="removeMultiple()" class="deleteIcon">
+        <ion-icon name="ios-trash-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button *ngIf="isOnHoldPress" (click)="clearAll()" class="cancelIcon">
+        <ion-icon name="md-add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content overflow-scroll="true">
 
-  <!--<ion-title #subHeader id="subHeader" class="secondary" text-center>{{ 'FAV' | translate }}</ion-title>-->
   <ion-card *ngIf="favArray.length">
     <ion-list>
-      <ion-item-sliding class="item-remove-animate" #slidingItem (ionSwipe)="removeFromFav(song,$index,slidingItem)" *ngFor="let song of favArray; let $index = index;"
+      <ion-item (press)="onHold(song)" (ionSwipe)="removeFromFav(song,$index)" *ngFor="let song of favArray; let $index = index;"
         [class.remove]="song.isRemoved">
-        <button ion-item (tap)="itemTapped($event, song.key)">
-          <ion-icon name="book" item-start></ion-icon>
+        <button ion-item (tap)="itemTapped($event, song)" [class.selected]="song.isSelected">
+          <ion-icon name="book" item-start *ngIf="!isOnHoldPress"></ion-icon>
+          <ion-icon [name]="song.isSelected ? 'md-checkbox': 'md-square-outline'" item-start *ngIf="isOnHoldPress"></ion-icon>
           {{song.value}}
         </button>
-        <ion-item-options side="right">
-          <button ion-button color="danger" expandable (tap)="removeFromFav(song,$index,slidingItem)">
-            <ion-icon name="md-trash"></ion-icon>
-            {{'remove' | translate }}
-          </button>
-        </ion-item-options>
-      </ion-item-sliding>
+      </ion-item>
     </ion-list>
   </ion-card>
   <div class="info" *ngIf="!favArray.length">
@@ -34,6 +41,8 @@
     </div>
   </div>
   <ion-fab right bottom>
-      <button ion-fab (tap)="openSearch()"><ion-icon ios="ios-search" md="md-search"></ion-icon></button>
-    </ion-fab>
+    <button ion-fab (tap)="openSearch()">
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

@@ -59,14 +59,6 @@ export class MyApp {
     this.sqlStorage.getSettings('lang').then(data => {
       this.translate.setDefaultLang(data);
     });
-    // Set the default language for translation strings, and the current language.
-
-
-    if (this.translate.getBrowserLang() !== undefined) {
-      //this.translate.use(this.translate.getBrowserLang());
-    } else {
-      // this.translate.use('en'); // Set your language here
-    }
   }
 
   initializeApp() {

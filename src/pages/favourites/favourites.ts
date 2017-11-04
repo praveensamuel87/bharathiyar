@@ -15,6 +15,7 @@ export class FavouritesPage {
   myInput: any;
   songDB: Array<any> = [];
   favArray: Array<any> = [];
+  isOnHoldPress: boolean = false;
   constructor(public navCtrl: NavController, public songsModel: SongsModel, public sqlStorage: SqlStorageProvider) {
     this.songDB = this.songsModel.songsList;
     this.getAllFav();
@@ -24,15 +25,22 @@ export class FavouritesPage {
       this.favArray = data;
     });
   }
-  itemTapped(event, index) {
-
-    this.navCtrl.push(ListPage, {
-      item: index
-    });
+  itemTapped(event, song) {
+    if (this.isOnHoldPress) {
+      song.isSelected = !song.isSelected;
+      let removableArr = [];
+      removableArr = this.favArray.filter(song => song.isSelected === true);
+      if (removableArr.length === 0) {
+        this.isOnHoldPress = false;
+      }
+    } else {
+      this.navCtrl.push(ListPage, {
+        item: song.key
+      });
+    }
   }
 
-  removeFromFav(song: any, index: number, slidingItem: ItemSliding) {
-    slidingItem.close();
+  removeFromFav(song: any, index: number) {
     song.isRemoved = true;
     this.sqlStorage.removeFav(song.key);
     setTimeout(() => {
@@ -48,4 +56,31 @@ export class FavouritesPage {
     this.navCtrl.push(SearchPage);
   }
 
+  onHold(song: any) {
+    if (this.isOnHoldPress === false) {
+      this.isOnHoldPress = true;
+      console.log(song);
+      song.isSelected = true;
+    }
+  }
+
+  removeMultiple() {
+    this.isOnHoldPress = false;
+    for (var i = this.favArray.length - 1; i >= 0; i--) {
+      let song = this.favArray[i];
+      if (song.isSelected) {
+        song.isRemoved = true;
+        this.sqlStorage.removeFav(song.key);
+        this.favArray.splice(i, 1);
+        
+      }
+    }
+  }
+
+  clearAll() {
+    this.isOnHoldPress = false;
+    for (var i = this.favArray.length - 1; i >= 0; i--) {
+      this.favArray[i].isSelected = false
+    }
+  }
 }

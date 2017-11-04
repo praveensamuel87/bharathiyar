@@ -17,6 +17,8 @@
     "search_info": "Type minimum of three letters to search.",
     "remove": "Remove",
     "no_fav_msg": "You have not marked any songs as favourite.",
+    "fav_added":"Added to Favourites",
+    "fav_removed":"Removed from Favourites",
     "Notifications":"Notifications",
     "Time": "Time",
     "Day": "Day",
@@ -26,5 +28,6 @@
     "Thursday":"Thursday",
     "Friday":"Friday",
     "Saturday":"Saturday",
-    "Sunday":"Sunday"
+    "Sunday":"Sunday",
+    "share_error": "Sorry! Not able to share at this moment."
 }

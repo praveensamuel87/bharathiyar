@@ -1,4 +1,15 @@
 favourites-page {
+    ion-header {
+        .deleteIcon {
+            font-size: 2.4rem;
+        }
+        .cancelIcon {
+            font-size: 2.4rem;
+            ion-icon {
+                transform: rotate(45deg);
+            }
+        }
+    }
     ion-content {
         .info {
             text-align: center;
@@ -22,7 +33,7 @@ favourites-page {
                 }
             }
             ion-list {
-                ion-item-sliding {
+                ion-item {
                     max-height: 50px;
                     overflow: hidden;
                     opacity: 1;
@@ -32,6 +43,11 @@ favourites-page {
                         transition-property: all;
                         transition-duration: 700ms;
                         transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+                    }
+                    button {
+                        &.selected {
+                            color: $primary;
+                        }
                     }
                 }
             }

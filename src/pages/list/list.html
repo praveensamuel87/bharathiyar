@@ -8,7 +8,7 @@
 
 </ion-header>
 
-<ion-content overflow-scroll="true" (tap)="closeFab(fab, $event)" [class.shake]="isShake" (ionScroll)="onScroll($event)" tappable>
+<ion-content overflow-scroll="true" (click)="closeFab(fab,$event)" [class.shake]="isShake" (ionScroll)="onScroll($event)" tappable>
   <div (swipe)="swipeEvent($event)">
     <ion-list>
       <div>
@@ -23,10 +23,10 @@
         <ion-icon name="add"></ion-icon>
       </button>
       <ion-fab-list side="top">
-        <button ion-fab (tap)="favClick(selectedSong)" class="favourite" [class.active]="isFavourite">
+        <button ion-fab (tap)="favClick(selectedSong);closeFab(fab,$event);" class="favourite" [class.active]="isFavourite">
           <ion-icon [name]="isFavourite? 'star' : 'star' "></ion-icon>
         </button>
-        <button ion-fab (tap)="shareSS()" class="share">
+        <button ion-fab (tap)="closeFab(fab,$event);shareSS();" class="share">
           <ion-icon name="share"></ion-icon>
         </button>
       </ion-fab-list>

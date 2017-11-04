@@ -40,11 +40,6 @@ export class ItemDetailsPage {
     },{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
   }
 
-  favClick(slidingItem: ItemSliding, song: any) {
-    console.log('fav has been clicked');
-    slidingItem.close();
-
-  }
   openSearch() {
     this.navCtrl.push(SearchPage, {},{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
   }
@@ -61,18 +56,5 @@ export class ItemDetailsPage {
     else {
       this.backToTopVisible = false;
     }
-  }
-
-
-  shreUsingShareSheet(slidingItem: ItemSliding, key: any) {
-    // Check if sharing via email is supported
-    //share(message, subject, file, url)
-    slidingItem.close();
-    console.log('fav has been clicked');
-    this.socialSharing.share("", "", "", "url").then(() => {
-      // Sharing via email is possible
-    }).catch(() => {
-      // Sharing via email is not possible
-    })
   }
 }

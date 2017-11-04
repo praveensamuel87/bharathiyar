@@ -1,5 +1,5 @@
 import { SqlStorageProvider } from './../../providers/sql-storage/sql-storage';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'settings-page',

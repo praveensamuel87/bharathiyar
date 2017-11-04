@@ -58,7 +58,7 @@ export class SearchPage {
     this.navCtrl.push(ListPage, {
       item: page.id,
       searchKeyWord: this.searchKeyWord
-    }, { animate: true, direction: 'forward', animation: 'transition', easing: 'ease-in-out' });
+    });
   }
 
   scrollToTop() {

@@ -37,4 +37,5 @@
       </button>
     </div>
   </div>
+  <demo-page *ngIf="showDemo" [showLeft]="showLeft" [demoSettingsObj]="demoSettingsObj" (swipeEvent)="swipeEvent($event)"></demo-page>
 </ion-content>

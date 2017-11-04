@@ -73,7 +73,7 @@ export class HomePage {
     /*this.localNotifications.on('click',(success)=>{
       this.navCtrl.push(ListPage, {
         item: Math.floor(Math.random() * this.songsModel.songsList.length) + 1  
-      },{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
+      });
     });*/
   }
 

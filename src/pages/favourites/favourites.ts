@@ -3,7 +3,7 @@ import { SqlStorageProvider } from './../../providers/sql-storage/sql-storage';
 import { SongsModel } from './../shared/songsModel';
 import { ListPage } from './../list/list';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Content, ItemSliding } from 'ionic-angular';
+import { NavController, Content } from 'ionic-angular';
 
 @Component({
   selector: 'favourites-page',
@@ -50,10 +50,6 @@ export class FavouritesPage {
 
   scrollToTop() {
     this.content.scrollToTop();
-  }
-
-  openSearch() {
-    this.navCtrl.push(SearchPage);
   }
 
   onHold(song: any) {

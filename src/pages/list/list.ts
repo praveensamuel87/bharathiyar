@@ -12,7 +12,7 @@ import { AppRate } from '@ionic-native/app-rate';
 })
 export class ListPage {
   @ViewChild(Content) content: Content;
-  @ViewChild('fab') fab:FabContainer;
+  @ViewChild('fab') fab: FabContainer;
   selectedSong: any;
   selectedPallavi: any;
   selectedSaranam: any;
@@ -23,6 +23,9 @@ export class ListPage {
   showBackToTop: boolean = false;
   searchKeyWord: string = '';
   hideNow: boolean = false;
+  showDemo: boolean = false;
+  demoSettingsObj: any;
+  showLeft: boolean = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public songsModel: SongsModel, private _sharedSvc: ShareSvc, private appRate: AppRate, private translate: TranslateService) {
     this.init(navParams.get('item'));
     this.searchKeyWord = navParams.get('searchKeyWord');
@@ -37,7 +40,7 @@ export class ListPage {
         rateButtonLabel: 'Rate it!',
         laterButtonLabel: 'Ask Later'
       },
-      usesUntilPrompt: 3,
+      usesUntilPrompt: 10,
       callbacks: {
         onButtonClicked: (buttonIndex) => {
           if (buttonIndex === 2) {
@@ -52,6 +55,11 @@ export class ListPage {
   }
 
   init(id) {
+    this.sqlStorage.getSettings('swipeDemo').then((data) => {
+      this.demoSettingsObj = data ? JSON.parse(data) : { 'left': false, 'right': false };
+      this.showDemo = this.demoSettingsObj.left && this.demoSettingsObj.right ? false : true;
+      this.showLeft = this.demoSettingsObj.left ? false : true;
+    });
     this.selectedSong = this.songsModel.getSong(id);
     this.getFav(this.selectedSong.id);
   }
@@ -85,9 +93,9 @@ export class ListPage {
     }
   }
 
-  closeFab(fab: FabContainer , e: Event) {
-    if (e.srcElement.nodeName !== "ION-ICON") {
-     fab.close();
+  closeFab(fab: FabContainer, e: Event) {
+    if (e && e.srcElement && e.srcElement.nodeName !== "ION-ICON") {
+      fab.close();
     }
   }
 

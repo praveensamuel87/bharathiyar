@@ -4,7 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
-import { ItemSliding, Content } from 'ionic-angular';
+import { Content } from 'ionic-angular';
 
 @Component({
   selector: 'page-item-details',
@@ -37,11 +37,11 @@ export class ItemDetailsPage {
 
     this.navCtrl.push(ListPage, {
       item: index
-    },{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
+    });
   }
 
   openSearch() {
-    this.navCtrl.push(SearchPage, {},{animate: true, direction: 'forward',animation:'transition',easing:'ease-in-out'});
+    this.navCtrl.push(SearchPage, {});
   }
 
   scrollToTop() {

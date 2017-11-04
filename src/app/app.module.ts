@@ -1,3 +1,4 @@
+import { DemoPage } from './../pages/demo/demo';
 import { HighlightifyPipe } from './../pages/shared/highlightifyPipe';
 import { ShareSvc } from './../pages/shared/shareSvc';
 import { AboutPage } from './../pages/about/about';
@@ -45,7 +46,8 @@ export function HttpLoaderFactory(http: Http) {
     CustomfilterBy,
     SettingsPage,
     AboutPage,
-    HighlightifyPipe
+    HighlightifyPipe,
+    DemoPage
     
   ],
   imports: [
@@ -69,7 +71,8 @@ export function HttpLoaderFactory(http: Http) {
     SearchPage,
     FavouritesPage,
     SettingsPage,
-    AboutPage
+    AboutPage,
+    DemoPage
   ],
   providers: [
     StatusBar,

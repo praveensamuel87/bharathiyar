@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 @Injectable()
 export class LoaderSvc {
     loader = this.loadingCtrl.create({

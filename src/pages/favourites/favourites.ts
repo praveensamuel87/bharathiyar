@@ -1,4 +1,3 @@
-import { SearchPage } from './../search/search';
 import { SqlStorageProvider } from './../../providers/sql-storage/sql-storage';
 import { SongsModel } from './../shared/songsModel';
 import { ListPage } from './../list/list';
@@ -16,6 +15,7 @@ export class FavouritesPage {
   songDB: Array<any> = [];
   favArray: Array<any> = [];
   isOnHoldPress: boolean = false;
+  showDelete: boolean = false;
   constructor(public navCtrl: NavController, public songsModel: SongsModel, public sqlStorage: SqlStorageProvider) {
     this.songDB = this.songsModel.songsList;
     this.getAllFav();
@@ -25,13 +25,15 @@ export class FavouritesPage {
       this.favArray = data;
     });
   }
-  itemTapped(event, song) {
+  itemTapped(song) {
     if (this.isOnHoldPress) {
       song.isSelected = !song.isSelected;
+      this.showDelete = true;
       let removableArr = [];
       removableArr = this.favArray.filter(song => song.isSelected === true);
       if (removableArr.length === 0) {
-        this.isOnHoldPress = false;
+        //this.isOnHoldPress = false;
+        this.showDelete = false;
       }
     } else {
       this.navCtrl.push(ListPage, {
@@ -55,8 +57,12 @@ export class FavouritesPage {
   onHold(song: any) {
     if (this.isOnHoldPress === false) {
       this.isOnHoldPress = true;
-      console.log(song);
-      song.isSelected = true;
+      this.showDelete = false;
+      //console.log(song);
+      if (song) {
+        this.showDelete = true;
+        song.isSelected = true;
+      }
     }
   }
 
@@ -68,7 +74,7 @@ export class FavouritesPage {
         song.isRemoved = true;
         this.sqlStorage.removeFav(song.key);
         this.favArray.splice(i, 1);
-        
+
       }
     }
   }

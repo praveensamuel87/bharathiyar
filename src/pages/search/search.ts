@@ -3,7 +3,7 @@ import { ListPage } from './../list/list';
 import { CustomfilterBy } from './../shared/filterBy';
 import { Component, ViewChild } from '@angular/core';
 
-import { NavController, Content, Searchbar, LoadingController } from 'ionic-angular';
+import { NavController, Content, Searchbar } from 'ionic-angular';
 
 @Component({
   selector: 'search-page',
@@ -20,41 +20,25 @@ export class SearchPage {
   serachResult: Array<any> = [];
 
   constructor(public navCtrl: NavController,
-    private _filterBy: CustomfilterBy, public songsModel: SongsModel, public loadingCtrl: LoadingController) {
+    private _filterBy: CustomfilterBy, public songsModel: SongsModel) {
     this.songDB = this.songsModel.songsList;
     //this.searchbar.setFocus();
   }
-
-  loader = this.loadingCtrl.create({
-    spinner: 'hide',
-    content: "Searching...",
-    showBackdrop: false
-  });
-
 
   onInput(value) {
     if (this.myInput && this.myInput.trim().length >= 3) {
       this.searchKeyWord = this.myInput.trim();
       this.isSearching = true;
-      //this.loader.present();
       
       this.serachResult = this._filterBy.transform(this.songDB, [this.myInput]);
-      /*setTimeout(() => {
-        this.isSearching = false;
-      }, 500);*/
       this.isSearching = false;
-      //this.loader.dismiss();
     }
     else{
       this.searchKeyWord = '';
     }
   }
-  onCancel(event) {
-    //on search cancel button click
-  }
 
-  itemTapped(event, page) {
-
+  itemTapped(page) {
     this.navCtrl.push(ListPage, {
       item: page.id,
       searchKeyWord: this.searchKeyWord

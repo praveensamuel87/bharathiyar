@@ -33,7 +33,7 @@ export class ItemDetailsPage {
     this.loader.dismiss();
   }
 
-  itemTapped(event, index) {
+  itemTapped(index) {
 
     this.navCtrl.push(ListPage, {
       item: index

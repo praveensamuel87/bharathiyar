@@ -77,7 +77,7 @@ export class HomePage {
     });*/
   }
 
-  itemTapped(event, page) {
+  itemTapped(page) {
     this.navCtrl.push(ItemDetailsPage, {
       item: page,
     });

@@ -7,18 +7,21 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="card-background-page"  overflow-scroll="true">
-  <ion-card class="thumbnail" tappable *ngFor="let page of pages;let $isOdd=odd;let $isEven=even" (click)="itemTapped($event, page)">
-    <ion-card-content>
+<ion-content class="card-background-page" overflow-scroll="true">
+  <div class="outerDiv">
+    <button class="thumbnail" ion-button tappable (click)="itemTapped(page)" *ngFor="let page of pages;let $isOdd=odd;let $isEven=even">
       <div class="card-title">{{page.title}}</div>
       <div class="card-numbers">
-        <ion-icon name="book"></ion-icon> <span>{{page.totalListing}}</span></div>
+        <ion-icon name="book"></ion-icon>
+        <span>{{page.totalListing}}</span>
+      </div>
       <div class="card-subtitle">
         பட்டியல்கள்</div>
-    </ion-card-content>
-  </ion-card>
-
+    </button>
+  </div>
   <ion-fab right bottom>
-    <button ion-fab (tap)="openSearch()"><ion-icon ios="ios-search" md="md-search"></ion-icon></button>
+    <button ion-fab (tap)="openSearch()">
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    </button>
   </ion-fab>
 </ion-content>

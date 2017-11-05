@@ -6,16 +6,23 @@
       </button>
     </ion-buttons>
     <ion-title>{{ 'FAV' | translate }}</ion-title>
-    <ion-buttons right>
-      <button ion-button *ngIf="isOnHoldPress" (click)="removeMultiple()" class="deleteIcon">
+    <ion-buttons right *ngIf="isOnHoldPress && showDelete" (click)="removeMultiple()" class="icons">
+      <button ion-button class="deleteIcon">
         <ion-icon name="ios-trash-outline"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons right>
-      <button ion-button *ngIf="isOnHoldPress" (click)="clearAll()" class="cancelIcon">
+    <ion-buttons right *ngIf="isOnHoldPress" (click)="clearAll()" class="icons">
+      <button ion-button class="cancelIcon">
         <ion-icon name="md-add-circle"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-buttons right *ngIf="!isOnHoldPress && favArray.length" (click)="onHold()" class="icons">
+      <button ion-button >
+        <ion-icon name="md-create"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
 
   </ion-navbar>
 </ion-header>
@@ -26,7 +33,7 @@
     <ion-list>
       <ion-item (press)="onHold(song)" (ionSwipe)="removeFromFav(song,$index)" *ngFor="let song of favArray; let $index = index;"
         [class.remove]="song.isRemoved">
-        <button ion-item (tap)="itemTapped($event, song)" [class.selected]="song.isSelected">
+        <button ion-item (tap)="itemTapped(song)" [class.selected]="song.isSelected">
           <ion-icon name="book" item-start *ngIf="!isOnHoldPress"></ion-icon>
           <ion-icon [name]="song.isSelected ? 'md-checkbox': 'md-square-outline'" item-start *ngIf="isOnHoldPress"></ion-icon>
           {{song.value}}

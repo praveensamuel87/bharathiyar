@@ -23,12 +23,12 @@ export class SettingsPage {
 
     //this.notificationTime = this.notificationTime ? this.notificationTime : "19:00";
     //this.notificationDay = this.notificationDay ? this.notificationDay : [1, 2, 3, 4, 5, 6, 0];
-    this.sqlStorage.getSettings('notification').then((value) => {
+    /*this.sqlStorage.getSettings('notification').then((value) => {
       let obj = value ? JSON.parse(value) : { 'notification': 'false', 'time': '19:00', 'day': [0, 1, 2, 3, 4, 5, 6] };
       this.notification = obj.notification;
       this.notificationTime = obj.time;
       this.notificationDay = obj.day;
-    });
+    });*/
     //this.getAllNotification();
   }
 

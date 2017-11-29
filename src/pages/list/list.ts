@@ -35,7 +35,7 @@ export class ListPage {
       },
       customLocale: {
         title: "Rate our App",
-        message: "If you love our App, please take a moment to rate it.",
+        message: "If you like our App, please take a moment to rate it.",
         cancelButtonLabel: 'Never',
         rateButtonLabel: 'Rate it!',
         laterButtonLabel: 'Ask Later'

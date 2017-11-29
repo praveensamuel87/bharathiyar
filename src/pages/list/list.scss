@@ -26,14 +26,19 @@ page-list {
         position: relative;
         background-image: url("../../assets/img/bharathi_song_banner.jpg");
         background-repeat: no-repeat;
-        @include bp(mobile-max) {
+        @include bp(mobile-min) {
             background-size: contain;
             background-color: #464646;
         }
         @include bp(tablet-min) {
+            background-size: cover;
             height: 300px;
             background-position: center center;
         }
+        @include bp(tab-ht-min) {
+            height: 400px;
+        }
+        
         div {
             position: absolute;
             height: 40px;

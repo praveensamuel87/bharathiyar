@@ -50,7 +50,7 @@ $bodyFontSize: 1.4rem;
 // --------------------------------------------------
 @import "roboto";
 @import "noto-sans";
-$breakpoints: ( mobile-min: 479px, mobile-max: 576px, tablet-min: 768px, large-min: 992px, xLarge-min: 1200px);
+$breakpoints: ( mobile-min: 479px, mobile-max: 576px, tablet-min: 768px, large-min: 992px, xLarge-min: 1200px, tab-ht-min: 800px);
 @mixin bp($device) {
     $width: map-get($breakpoints, $device);
     @if $device==mobile-max {
@@ -58,7 +58,12 @@ $breakpoints: ( mobile-min: 479px, mobile-max: 576px, tablet-min: 768px, large-m
             @content;
         }
     }
-    @else {
+    @else if $device==tab-ht-min {
+        @media (min-height: $width) {
+            @content;
+        }
+    }
+    @else{
         @media (min-width: $width) {
             @content;
         }

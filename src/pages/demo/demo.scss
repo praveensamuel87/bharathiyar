@@ -1,54 +1,63 @@
 demo-page {
-    .modal {
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background: white;
-        opacity: 0.6;
+  .close {
+    bottom: 0px;
+    width: 100%;
+    position: fixed;
+    padding: 20px;
+  }
+  .modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: white;
+    opacity: 0.6;
+  }
+  ion-content {
+    z-index: 1001;
+    background-color: #b1aeae;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    position: fixed;
+    background: inherit !important;
+    figure {
+      text-align: center;
+      &.swipeLeft {
+        margin-top: 0;
+        img {
+          animation: swipeleft 1.5s;
+          animation-iteration-count: 30;
+        }
+      }
+      &.swipeRight {
+        img {
+          animation: swiperight 1.5s;
+          animation-iteration-count: 30;
+        }
+      }
+      figcaption {
+        font-size: 2rem;
+      }
     }
-    ion-content {
-        z-index: 1001;
-        background-color: #b1aeae;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        position: fixed;
-        background: inherit!important;
-        figure {
-            text-align: center;
-            top: 25%;
-            position: fixed;
-            .swipeLeft {
-                animation: swipeleft 1.5s;
-                animation-iteration-count: 30;
-            }
-            .swipeRight {
-                animation: swiperight 1.5s;
-                animation-iteration-count: 30;
-            }
-            figcaption {
-                font-size: 2.5rem;
-            }
-        }
+  }
+  @keyframes swipeleft {
+    from {
+      transform: rotate(25deg)
     }
-    @keyframes swipeleft {
-        from {
-            transform: rotate(25deg)
-        }
-        to {
-            transform: rotate(-25deg)
-        }
+    to {
+      transform: rotate(-25deg)
     }
-    @keyframes swiperight {
-        from {
-            transform: rotate(-25deg)
-        }
-        to {
-            transform: rotate(25deg)
-        }
+  }
+  @keyframes swiperight {
+    from {
+      transform: rotate(-25deg)
     }
+    to {
+      transform: rotate(25deg)
+    }
+  }
 }

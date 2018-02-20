@@ -23,8 +23,7 @@ export class ListPage {
   showBackToTop: boolean = false;
   searchKeyWord: string = '';
   hideNow: boolean = false;
-  showDemo: boolean = false;
-  demoSettingsObj: any;
+  isDemoDone: any = true;
   showLeft: boolean = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, public sqlStorage: SqlStorageProvider, public songsModel: SongsModel, private _sharedSvc: ShareSvc, private appRate: AppRate, private translate: TranslateService) {
     this.init(navParams.get('item'));
@@ -56,9 +55,7 @@ export class ListPage {
 
   init(id) {
     this.sqlStorage.getSettings('swipeDemo').then((data) => {
-      this.demoSettingsObj = data ? JSON.parse(data) : { 'left': false, 'right': false };
-      this.showDemo = this.demoSettingsObj.left && this.demoSettingsObj.right ? false : true;
-      this.showLeft = this.demoSettingsObj.left ? false : true;
+      this.isDemoDone = data ? data : false;
     });
     this.selectedSong = this.songsModel.getSong(id);
     this.getFav(this.selectedSong.id);
@@ -184,5 +181,8 @@ export class ListPage {
   }
   ionViewDidEnter() {
     this.appRate.promptForRating(false);
+  }
+  onDemoClick(value) {
+    this.isDemoDone = value;
   }
 }

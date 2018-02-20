@@ -1,14 +1,18 @@
 <div class="modal">
 </div>
 <ion-content overflow-scroll="true">
-  <div (swipe)="onSwipe($event)">
-    <figure *ngIf="showLeft">
-      <img src="assets/img/swipe_left.png" class="swipeLeft" alt="Swipe Left Icon">
+  
+  <div>
+    <figure class="swipeLeft">
+      <img src="assets/img/swipe_left.png" alt="Swipe Left Icon">
       <figcaption>Swipe Left for the Next song.</figcaption>
     </figure>
-    <figure  *ngIf="!showLeft">
-      <img src="assets/img/swipe_right.png" class="swipeRight" alt="Swipe Right Icon">
+    <figure class="swipeRight">
+      <img src="assets/img/swipe_right.png" alt="Swipe Right Icon">
       <figcaption>Swipe Right for the Previous song.</figcaption>
     </figure>
   </div>
+  <button class="close" ion-button (tap)="closeThis()">
+    close
+  </button>
 </ion-content>

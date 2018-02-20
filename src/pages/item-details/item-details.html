@@ -20,12 +20,12 @@
       </ion-card-header>
 
       <ion-list [class.close]="!songsList.show" [class.open]="songsList.show">
-        <ion-item-sliding *ngFor="let song of songsList.songs">
+        <ion-item *ngFor="let song of songsList.songs">
           <button ion-item (tap)="itemTapped(song.index)">
             <ion-icon name="book" item-start></ion-icon>
             {{song.name}}
           </button>
-        </ion-item-sliding>
+        </ion-item>
       </ion-list>
     </ion-card>
     <ion-card *ngIf="selectedSongs.length !== 0">
@@ -37,12 +37,12 @@
 
       </ion-card-header>
       <ion-list [class.close]="!showOtherSongList" [class.open]="showOtherSongList">
-        <ion-item-sliding *ngFor="let key of selectedSongs">
+        <ion-item *ngFor="let key of selectedSongs">
           <button ion-item (tap)="itemTapped(key.index)">
             <ion-icon name="book" item-start></ion-icon>
             {{key.name}}
           </button>
-        </ion-item-sliding>
+        </ion-item>
       </ion-list>
     </ion-card>
   </ion-list>
